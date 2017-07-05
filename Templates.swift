@@ -2728,7 +2728,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "backgroundColor": UIColor.white,
                     "bottomButtonSizeW": MYINT(60),
                     "bottomButtonSizeH": MYINT(60),
-                    "intervalH": MYINT(26),
+                    "intervalH": MYINT(28),
                     "ButtonSizeW": MYINT(60),
                     "ButtonSizeH": MYINT(60),
                     "hasOptions": MYINT(1),
