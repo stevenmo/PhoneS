@@ -552,19 +552,19 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                 ],
                 "iPhone6+" : [
                     "className" : "CPageIncomingCall",
-                    "callerRect": CENTER_RECTX(0, 56, 280, 48 ),
-                    "callerSecondRect": CENTER_RECTX(0, 105, 140, 28 ),
-                    "acceptBtnRect": CENTER_RECTX( 83, -152, 66, 66 ),
-                    "declineBtnRect": CENTER_RECTX( -83, -152,  66, 66 ),
-                    "caption_acceptRect": CENTER_RECTX( 83, -86, 110, 30 ),
-                    "caption_declineRect": CENTER_RECTX( -83, -86, 110, 30 ),
-                    "remindRect": CENTER_RECTX(-83, -229, 22, 22 ),
-                    "messageRect": CENTER_RECTX( 83, -225, 19, 17 ),
-                    "caption_remindRect": CENTER_RECTX(-83, -207, 110, 30 ),
-                    "caption_messageRect": CENTER_RECTX( 83, -207, 110, 30 ),
-                    "nameFont": LightFONT(30),
-                    "secondFont": MYFONT(17),
-                    "captionFont": MYFONT(13),
+                    "callerRect": CENTER_RECTX(0, 60, 280, 48 ),
+                    "callerSecondRect": CENTER_RECTX(0, 119, 140, 28 ),
+                    "acceptBtnRect": CENTER_RECTX( 93, -167, 71, 71 ),
+                    "declineBtnRect": CENTER_RECTX( -93, -167,  71, 71 ),
+                    "caption_acceptRect": CENTER_RECTX( 93, -93, 110, 30 ),
+                    "caption_declineRect": CENTER_RECTX( -93, -93, 110, 30 ),
+                    "remindRect": CENTER_RECTX(-93, -247, 24, 24 ),
+                    "messageRect": CENTER_RECTX( 93, -245, 21, 18 ),
+                    "caption_remindRect": CENTER_RECTX(-93, -225, 110, 30 ),
+                    "caption_messageRect": CENTER_RECTX( 93, -225, 110, 30 ),
+                    "nameFont": LightFONT(36),
+                    "secondFont": MYFONT(19),
+                    "captionFont": MYFONT(14),
                     "textColor": MYINT(0xffffff),
                     "NoFlash": MYINT(0x1),
                     "captionColor": UIColor.white,
@@ -784,6 +784,27 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "buttonDistanceY": MYINT(40),
                     "buttonWidth": MYINT(64),
                     "buttonHeight": MYINT(64),
+                    "buttonHasText": MYINT(1),
+                    "hasAnimation": MYINT(1),
+                    "textColor": MYINT(0xffffff),
+                    "backgroundColor": UIColor.black,
+                    "batteryColor": MYINT(0x00ff00),
+                    "theme":"theme9",
+                    
+                ],
+                "iPhone6+" : [
+                    "className" : "CPageOutgoingCall",
+                    "callerRect": CENTER_RECTX( 0, 63, 260, 48 ),
+                    "callerSecondRect": CENTER_RECTX( 0, 119, 260, 28 ),
+                    "endCallRect": CENTER_RECTX(0, -165, 71, 71 ),
+                    "nameFont": LightFONT(36),
+                    "secondFont": MYFONT(19),
+                    "captionFont": MYFONT(25),
+                    "buttonTop": MYINT(148),
+                    "buttonDistanceX": MYINT(29),
+                    "buttonDistanceY": MYINT(41),
+                    "buttonWidth": MYINT(59),
+                    "buttonHeight": MYINT(59),
                     "buttonHasText": MYINT(1),
                     "hasAnimation": MYINT(1),
                     "textColor": MYINT(0xffffff),
@@ -2703,13 +2724,13 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
             [
                 "iPhone6" : [
                     "className" : "CPageHome",
-                    "font": MYFONT(14),
+                    "font": MYFONT(18),
                     "backgroundColor": UIColor.white,
-                    "bottomButtonSizeW": MYINT(62),
-                    "bottomButtonSizeH": MYINT(62),
-                    "intervalH": MYINT(40),
-                    "ButtonSizeW": MYINT(48),
-                    "ButtonSizeH": MYINT(48),
+                    "bottomButtonSizeW": MYINT(60),
+                    "bottomButtonSizeH": MYINT(60),
+                    "intervalH": MYINT(26),
+                    "ButtonSizeW": MYINT(60),
+                    "ButtonSizeH": MYINT(60),
                     "hasOptions": MYINT(1),
                     "theme": "theme9",
                 ],
@@ -2869,6 +2890,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "theme": "theme7",
                 ],
         ],
+        
         "alert8" :
             [
                 "iPhone6" : [
@@ -3101,6 +3123,16 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "title": "My title",
                 ],
         ],
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     ]
 
 }
