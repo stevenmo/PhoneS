@@ -13,7 +13,7 @@
 - (id)initWithTemplate: (NSString *)templateName delegate:(id)delegate params:(NSDictionary *)params
 {
 	self = [ super initWithTemplate: templateName delegate: delegate params: params ];
-    _mailNotification = [ [ CText alloc ] initWithText:@"8" rect: MYRECTI(128,-88,24,24) color: 0xffffff font: BOLDFONT(18) container: self ];
+    _mailNotification = [ [ CText alloc ] initWithText:@"8" rect: MYRECTI(128,-88,24,24) color: 0xffffff font: BOLDFONT(15) container: self ];
     _mailNotification._background = [ self getImageName:@"notification-icon"];
     
     [ self setupIcons ];
@@ -161,12 +161,12 @@
     
     int fullW = mainV.frame.size.width;
     int buttonSizeW = [[ self._params objectForKey:@"ButtonSizeW" ] intValue ];
-    if ( buttonSizeW >= 61 )
+    if ( buttonSizeW >= 63 )
         return [ self getIconPos3: index ];
     
     int buttonSizeH = [[ self._params objectForKey:@"ButtonSizeH" ] intValue ];
     
-    int top = 27;
+    int top = [[ self._params objectForKey:@"topDistance" ] intValue ];;
     float interval = ( fullW - (float)buttonSizeW * 4 ) / 5;
     float intervalH = [[ self._params objectForKey:@"intervalH" ] intValue ];
     
@@ -233,7 +233,7 @@
     }
 }
 
-#define TEXT_SIZEH            25
+#define TEXT_SIZEH            21
 #define MARGIN_BOTTOMBAR_TOP  13
 
 -(void) createAItem: (NSObject *)item r: (CRect *) r mainV:(UIView *)mainV
@@ -274,7 +274,7 @@
     rLabel.origin.x -= 25;
     rLabel.size.width += 50;
     
-    UILabel * label = [ Utils createLabelInView:mainV text:caption frame: rLabel color: [UIColor whiteColor] font:MYFONT(14) ];
+    UILabel * label = [ Utils createLabelInView:mainV text:caption frame: rLabel color: [UIColor whiteColor] font:MYFONT(13) ];
     label.textAlignment = NSTextAlignmentCenter;
 }
 
