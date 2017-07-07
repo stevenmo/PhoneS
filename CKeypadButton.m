@@ -17,7 +17,7 @@
     self.frame = CGRectMake(pos.x,pos.y,width,height);
     
     [ self setBackgroundImage:image forState: UIControlStateNormal ];
-    [ self setBackgroundImage:imageH forState: UIControlStateHighlighted ];
+    [ self setBackgroundImage:imageH forState: UIControlStateHighlighted ];   ///  COLOR(77,99,33)
 
     [ self addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside ];
     
