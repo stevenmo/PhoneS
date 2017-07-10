@@ -393,42 +393,56 @@
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
+    [ self setupViews:parentView bPlay:bPlay bResetView:true ];
+    return _view;
+}
+
+-(void) initView: (UIView *) parentView bPlay:(bool)bPlay {
+    
     if( _view )
-    {
         [ _view removeFromSuperview ];
-        _view = nil;
+    
+    CGRect frame = (_frame==nil)? parentView.frame : [_frame getRect: parentView.frame ];
+    UIView * mainV = [[ UIView alloc ] initWithFrame: frame ];
+    _view = mainV;
+    UIColor * bkColor = [_params objectForKey:@"backgroundColor" ];
+    if( bkColor != nil )
+        mainV.backgroundColor = bkColor;
+    [ self loadBackgroundImage ];
+    [ parentView addSubview: mainV ];
+}
+
+-(UIView *) setupViews: (UIView *) parentView bPlay:(bool)bPlay bResetView: (BOOL) bResetView
+{
+    if( bResetView || self._view == nil )
+        [ self initView:parentView bPlay:bPlay ];
+    else {
+        [ parentView bringSubviewToFront: self._view ];
     }
+    
+    if( _topBar != nil && !_topBar._hidden )
+        [_topBar render: _view bPlay: bPlay ];
+    
+    _view.userInteractionEnabled = true;
+    
+    [ self setupBackgroundClickHandler: _view bPlay: bPlay ];
+    
+    [ _previousBtn render: _view bPlay: bPlay ];
+    [ _nextBtn render: _view bPlay: bPlay ];
+    
+    [ _hotkey render: _view bPlay:bPlay ];
+    [ self renderProperties: bPlay ];
+    
+    return _view;
+}
+
+-(void) renderProperties: (BOOL) bPlay {
     
     [ __triggerTimer invalidate ];
     __triggerTimer = nil;
     
-    CGRect frame = (_frame==nil)? parentView.frame : [_frame getRect: parentView.frame ];
-    
-    UIView * mainV = [[ UIView alloc ] initWithFrame: frame ];
-    
-    UIColor * bkColor = [_params objectForKey:@"backgroundColor" ];
-    if( bkColor != nil )
-        mainV.backgroundColor = bkColor;
-    
-    if( _topBar != nil && !_topBar._hidden )
-        [_topBar render: mainV bPlay: bPlay ];
-    
-    _view = mainV;
-    _view.userInteractionEnabled = true;
-    //[ self setupExitHandler ];
-    
-    [ self setupBackgroundClickHandler: mainV bPlay: bPlay ];
-    
-    [ self loadBackgroundImage ];
-    [ parentView addSubview: mainV ];
-    
     [ self changeBrightness: _alpha ];
     [ self applyProximity: _proximitySensorEanbled ];
-    
-    [ _previousBtn render: mainV bPlay: bPlay ];
-    [ _nextBtn render: mainV bPlay: bPlay ];
-
-    [ _hotkey render: mainV bPlay:bPlay ];
     
     if ( bPlay )
         [[ CVibrate sharedInstance ] play: self._vibrateMode ];
@@ -438,7 +452,6 @@
                                                                                        action: action
                                                                                         label: CURRENT_DEVICE_ID
                                                                                         value: nil ] build] ];
-    return mainV;
 }
 
 -(void) onRenderCompleted:(UIView *) parentView bPlay:(bool)bPlay
@@ -463,7 +476,7 @@
     [ [ UIDevice currentDevice] setProximityMonitoringEnabled: _proximitySensorEanbled ];
 }
 
--(void) loadBackgroundImage
+-(UIImageView *) loadBackgroundImage
 {
     UIImage * img = _backgroundImg;
     bool bHigh = false;
@@ -486,7 +499,7 @@
         }
     }
     if( img == nil )
-        return;
+        return nil;
     
     UIImageView * backV = [[ UIImageView alloc ] initWithImage: img ];
     if( _backgroundKeepAspect )
@@ -505,6 +518,7 @@
             backV.frame = self._view.bounds;
     }
     [ self._view insertSubview: backV atIndex: 0 ];
+    return backV;
 }
 
 -(void) setupBackgroundClickHandler: (UIView *)view bPlay: (bool) bPlay
@@ -538,11 +552,20 @@
 
 -(void) playEnd
 {
+    NSLog(@"page playEnd %@", self );
+    
     if( _view )
     {
         [ _view removeFromSuperview ];
         _view = nil;
     }
+}
+
+-(UIView *) getBackgroundView
+{
+    UIView * view = _view;
+    _view = nil;
+    return view;
 }
 
 -(UIImage *) getThumbnail

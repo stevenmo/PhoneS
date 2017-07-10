@@ -3066,7 +3066,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         "camera1" :
             [
                 "iPhone6" : [
-                    "className" : "CPageFaceTime",
+                    "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
@@ -3075,7 +3075,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         "camera2" :
             [
                 "iPhone6" : [
-                    "className" : "CPageFaceTime",
+                    "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
                     "iconRect": MYRECTI( 0, 0, 66, 40 ),
                     "theme": "theme3",
@@ -3084,7 +3084,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         "camera3" :
             [
                 "iPhone6" : [
-                    "className" : "CPageFaceTime",
+                    "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
@@ -3093,7 +3093,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         "camera7" :
             [
                 "iPhone6" : [
-                    "className" : "CPageFaceTime",
+                    "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
@@ -3102,7 +3102,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         "camera8" :
             [
                 "iPhone6" : [
-                    "className" : "CPageFaceTime",
+                    "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
                     "iconRect": MYRECTI( 0, 0, 56, 33 ),
                     "theme": "theme3",
