@@ -3187,14 +3187,30 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
             [
                 "iPhone6" : [
                     "className" : "CPageLocker",
-                    "sliderFont": MYFONT(15),
+                    "sliderFont": MYFONT(20),
+                    "callerRect": CENTER_RECTX(0, 51, 290, 50 ),
+                    "callerSecondRect": CENTER_RECTX(0, 100, 140, 28 ),
+                    "acceptBtnRect": CENTER_RECTX( 0, -156, 280, 78 ),
+                    "remindRect": CENTER_RECTX(-93, -238, 24, 24 ),
+                    "messageRect": CENTER_RECTX( 94, -237, 22, 19 ),
+                    "caption_remindRect": CENTER_RECTX(-93, -217, 126, 34 ),
+                    "caption_messageRect": CENTER_RECTX( 93, -217, 126, 34 ),
+                    "nameFont": LightFONT(36),
+                    "secondFont": MYFONT(20),
+                    "ButtonColor": MYINT(0xffffff),
+                    "captionFont": MYFONT(15),
+                    "textColor": MYINT(0xffffff),
+                    "NoFlash": MYINT(0x1),
+                    "captionColor": UIColor.white,
+                    "batteryColor": MYINT(0x00ff00),
                     "timerFont": BOLDFONT(36),
                     "backgroundColor": UIColor.clear,
-                    "textColor": MYINT(0xffffff),
                     "timerRect": MYRECTI( 0, 100, 0, 100),
-                    "sliderRect": MYRECTI( 0, -100, 0, 50),
+                    "sliderRect": MYRECTI( 20, -142, 0, 50),
                     "theme": "theme9",
                     "title": "My title",
+                    
+
                 ],
         ],
         
