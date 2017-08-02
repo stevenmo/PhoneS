@@ -3209,8 +3209,6 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "sliderRect": MYRECTI( 20, -142, 0, 50),
                     "theme": "theme9",
                     "title": "My title",
-                    
-
                 ],
         ],
         

@@ -21,6 +21,7 @@
     
     UIFont * sliderFont = [ params objectForKey:@"sliderFont" ];
     
+    __slideBtnBack = [ [ CText alloc ] initWithText:@"slide to answer" rect: [ params objectForKey:@"sliderRect" ] color: 0x000000 font: sliderFont container: self ];
     __slideBtn = [ [ CText alloc ] initWithText:@"slide to answer" rect: [ params objectForKey:@"sliderRect" ] color: textColor font: sliderFont container: self ];
     
     __slideBtn._linkPage = [ NSNumber numberWithInt: 1 ];
@@ -47,7 +48,8 @@
     //@"Jon Walker";
     _caller = [ [ CText alloc ] initWithText:@"Sean Walker" rect: [ params objectForKey:@"callerRect" ] color: textColor font: nameFont container: self ];
     _callerSecond = [ [ CText alloc ] initWithText:@"mobile" rect: [ params objectForKey:@"callerSecondRect" ]  color: textColor font: secondFont container:self ];
-
+    
+    
     _accpetBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answer"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
     [ _accpetBtn setLinkToEnd ];
 /*
@@ -66,8 +68,10 @@
 {
     UIView * mainV = [ super render: parentView bPlay: bPlay ];
     
-//  [ __timer render:mainV bPlay:bPlay ];
+
+    //  [ __timer render:mainV bPlay:bPlay ];
     [ _accpetBtn render: mainV bPlay: bPlay ];
+    [ __slideBtnBack render: mainV bPlay: bPlay ];
     [ __slideBtn render:mainV bPlay:bPlay ];
     
     UIView * view = __slideBtn._view;
@@ -89,6 +93,7 @@
     [ _callerImage render: mainV bPlay: bPlay ];
     [ _caller render: mainV bPlay: bPlay ];
     [ _callerSecond render: mainV bPlay: bPlay ];
+
     
 
 //    [ _declineBtn render: mainV bPlay: bPlay ];
@@ -99,6 +104,8 @@
     
     CALayer *maskLayer = [CALayer layer];
     UIImage *mask = [ Utils loadImage:@"shadow" templateName:@"unlock" ];
+    UIImage *blacktext = [ Utils loadImage:@"blackText.png" templateName:@"unlock" ];
+    maskLayer.contents = (id)blacktext.CGImage;
     maskLayer.contents = (id)mask.CGImage;
     //  maskLayer.contentsGravity = kCAGravityCenter;
     maskLayer.frame = view.bounds;
@@ -133,11 +140,11 @@
     UIView * view = __slideBtn._view;
     
     CGRect frame = _maskLayer.frame;
-    if ( frame.origin.x >= view.frame.size.width - frame.size.width/2 )
-        frame.origin.x = 0;
+    if ( frame.origin.x >= view.frame.size.width )
+        frame.origin.x = -100;
     
     NSLog(@"on timer come: %f", frame.origin.x );
-    _maskLayer.frame = CGRectMake( frame.origin.x + 2, frame.origin.y, frame.size.width, frame.size.height );
+    _maskLayer.frame = CGRectMake( frame.origin.x + 1.5, frame.origin.y, frame.size.width, frame.size.height );
     [ view setNeedsDisplay ];
 }
 

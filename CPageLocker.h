@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) CText *_caller;
 @property (nonatomic, strong) CText *_callerSecond;
+@property (nonatomic, strong) CText *_slideBtnBack;
 
 @property (nonatomic, strong) CImage *_accpetBtn;
 @property (nonatomic, strong) CImage *_declineBtn;
