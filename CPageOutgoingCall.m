@@ -170,12 +170,18 @@
     UIButton * btn = (UIButton *)_endCallBtn._view;
     //   UIImage * image1 = [ Utils loadImage:@"answer" templateName:self._templateName ];
     UIImage * image = [ Utils loadImage:@"end-call" templateName:self._templateName ];
-    UIImage * image1 = [ Utils loadImage:@"end-call1" templateName:self._templateName ];
-    UIImage * image2 = [ Utils loadImage:@"end-call2" templateName:self._templateName ];
-    UIImage * image3= [ Utils loadImage:@"end-call3" templateName:self._templateName ];
-    UIImage * image4 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
-    UIImage * image5 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
-    UIImage * image6 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
+    NSMutableArray* imgArray = [[NSMutableArray alloc] init];
+
+    for (int i = 1; i <= 15; i++) {
+        UIImage* imageCopy = [Utils loadImage:[NSString stringWithFormat:@"%d.png",i] templateName:self._templateName];
+        [imgArray addObject:(id)imageCopy.CGImage];
+    }
+    //    UIImage * image1 = [ Utils loadImage:@"end-call1" templateName:self._templateName ];
+//    UIImage * image2 = [ Utils loadImage:@"end-call2" templateName:self._templateName ];
+//    UIImage * image3= [ Utils loadImage:@"end-call3" templateName:self._templateName ];
+//    UIImage * image4 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
+//    UIImage * image5 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
+//    UIImage * image6 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
     
 //    UIImage * image1 = [ Utils loadImage:@"end-call green" templateName:self._templateName ];
 //    image = [ self imageWithImage:image rotatedByHue: 90 ];
@@ -213,16 +219,20 @@
     CAKeyframeAnimation *colorChange = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
 //    colorChange.values = [NSArray arrayWithObjects:image1,image2,image3,image4, nil];
     
-    NSMutableArray *animationSequenceArray = [[NSMutableArray alloc] init];
-    
-    [animationSequenceArray addObject:(id)image1.CGImage];
-    [animationSequenceArray addObject:(id)image2.CGImage];
-    [animationSequenceArray addObject:(id)image3.CGImage];
-    [animationSequenceArray addObject:(id)image4.CGImage];
-    [animationSequenceArray addObject:(id)image5.CGImage];
-    [animationSequenceArray addObject:(id)image6.CGImage];
+//    NSMutableArray *animationSequenceArray = [[NSMutableArray alloc] init];
+//    for(int i = 1; i <= 15; i++)
+//    {
+//        UIImage* photo = [UIImage imageNamed:[NSString stringWithFormat:@"%04d.png",i]];
+//        [animationSequenceArray addObject:photo];
+//    }
+//    [animationSequenceArray addObject:(id)image1.CGImage];
+//    [animationSequenceArray addObject:(id)image2.CGImage];
+//    [animationSequenceArray addObject:(id)image3.CGImage];
+//    [animationSequenceArray addObject:(id)image4.CGImage];
+//    [animationSequenceArray addObject:(id)image5.CGImage];
+//    [animationSequenceArray addObject:(id)image6.CGImage];
     colorChange.calculationMode = kCAAnimationDiscrete;
-    colorChange.values = animationSequenceArray;
+    colorChange.values = imgArray;
     colorChange.duration = duration;
     colorChange.repeatCount = 1.0f;
     colorChange.removedOnCompletion = NO;

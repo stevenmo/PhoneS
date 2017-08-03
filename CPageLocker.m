@@ -140,11 +140,11 @@
     UIView * view = __slideBtn._view;
     
     CGRect frame = _maskLayer.frame;
-    if ( frame.origin.x >= view.frame.size.width )
-        frame.origin.x = -100;
+    if ( frame.origin.x >= view.frame.size.width - 100)
+        frame.origin.x = -150;
     
     NSLog(@"on timer come: %f", frame.origin.x );
-    _maskLayer.frame = CGRectMake( frame.origin.x + 1.5, frame.origin.y, frame.size.width, frame.size.height );
+    _maskLayer.frame = CGRectMake( frame.origin.x + 3, frame.origin.y, frame.size.width, frame.size.height );
     [ view setNeedsDisplay ];
 }
 
