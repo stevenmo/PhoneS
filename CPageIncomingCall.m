@@ -29,8 +29,7 @@
     if ( secondFont == nil )
         secondFont = MYFONT(16);
 
-    //@"Jon Walker";
-    _caller = [ [ CText alloc ] initWithText:@"Sean Walker" rect: [ params objectForKey:@"callerRect" ] color: textColor font: nameFont container: self ];
+    _caller = [ [ CText alloc ] initWithText:@"Jon Walker" rect: [ params objectForKey:@"callerRect" ] color: textColor font: nameFont container: self ];
     _callerSecond = [ [ CText alloc ] initWithText:@"mobile" rect: [ params objectForKey:@"callerSecondRect" ]  color: textColor font: secondFont container:self ];
     
     _accpetBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answer"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
@@ -48,108 +47,39 @@
 }
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
-
 {
-    
     UIView * mainV = [ super render: parentView bPlay: bPlay ];
-     
-     
-     
-     [ self createImageButtonInView: mainV imageName:@"remind" rectName:@"remindRect" ];
-     
-     [ self createImageButtonInView: mainV imageName:@"message" rectName:@"messageRect" ];
-     
-     
-     
-     UILabel * label = [ self createCaption:@"Remind Me" rectName:@"caption_remindRect" ];
-     
-     label.textAlignment = NSTextAlignmentCenter;
-     
-     
-     
-     label = [ self createCaption:@"Message" rectName:@"caption_messageRect" ];
-     
-     label.textAlignment = NSTextAlignmentCenter;
-     
-     
-     
-     label = [ self createCaption:@"Accept" rectName:@"caption_acceptRect" ];
-     
-     label.textAlignment = NSTextAlignmentCenter;
-     
-     
-     
-     label = [ self createCaption:@"Decline" rectName:@"caption_declineRect" ];
-     
-     label.textAlignment = NSTextAlignmentCenter;
-     
-     
-     
-     [ _callerImage render: mainV bPlay: bPlay ];
-     
-     [ _caller render: mainV bPlay: bPlay ];
-     
-     [ _callerSecond render: mainV bPlay: bPlay ];
-     
-     
-     
-     [ _accpetBtn render: mainV bPlay: bPlay ];
-     
-     [ _declineBtn render: mainV bPlay: bPlay ];
-     
-     
-     
-     [ _timer invalidate ];
-     
-     
-     
-     BOOL bNoFlash = [[ self._params objectForKey:@"NoFlash" ] boolValue ];
-     
-     
-     
-     if( bPlay && !bNoFlash )
-     
-     _timer = [ NSTimer scheduledTimerWithTimeInterval: 0.5 target:self selector:@selector(onTimerCome:) userInfo:nil repeats:YES ];
-     
-     
-     
-     return mainV;
     
+    [ self createImageButtonInView: mainV imageName:@"remind" rectName:@"remindRect" ];
+    [ self createImageButtonInView: mainV imageName:@"message" rectName:@"messageRect" ];
     
+    UILabel * label = [ self createCaption:@"Remind Me" rectName:@"caption_remindRect" ];
+    label.textAlignment = NSTextAlignmentCenter;
     
-//    UIImageView * imgv = [[ UIImageView alloc ] initWithFrame:parentView.bounds ];
-//    imgv.image = [UIImage imageNamed:@"pie.png" ];
-//
-//    UIImage * image1 = [UIImage imageNamed:@"end-call1.png"  ];
-//    UIImage * image2 = [UIImage imageNamed:@"end-call2.png" ];
-//    UIImage * image3 = [UIImage imageNamed:@"end-call3.png" ];
-//    UIImage * image4 = [UIImage imageNamed:@"end-call4.png" ];
-//    UIImage * image5 = [UIImage imageNamed:@"end-call5.png" ];
-//    UIImage * image6 = [UIImage imageNamed:@"end-call6.png" ];
-//    [ parentView addSubview: imgv ];
-//    
-//    CAKeyframeAnimation *colorChange = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
-//    //    colorChange.values = [NSArray arrayWithObjects:image1,image2,image3,image4, nil];
-//    
-//    NSMutableArray *animationSequenceArray = [[NSMutableArray alloc] init];
-//    
-//    [animationSequenceArray addObject:(id)image1.CGImage];
-//    [animationSequenceArray addObject:(id)image2.CGImage];
-//    [animationSequenceArray addObject:(id)image3.CGImage];
-//    [animationSequenceArray addObject:(id)image4.CGImage];
-//    [animationSequenceArray addObject:(id)image5.CGImage];
-//    [animationSequenceArray addObject:(id)image6.CGImage];
-//    colorChange.calculationMode = kCAAnimationDiscrete;
-//    colorChange.values = animationSequenceArray;
-//    colorChange.duration = 0.5;
-//    colorChange.repeatCount = 1.0f;
-//    colorChange.removedOnCompletion = NO;
-//    [imgv.layer addAnimation:colorChange forKey:@"contents"];
-//
-//    
-//    
-//    return imgv;
+    label = [ self createCaption:@"Message" rectName:@"caption_messageRect" ];
+    label.textAlignment = NSTextAlignmentCenter;
     
+    label = [ self createCaption:@"Accept" rectName:@"caption_acceptRect" ];
+    label.textAlignment = NSTextAlignmentCenter;
+
+    label = [ self createCaption:@"Decline" rectName:@"caption_declineRect" ];
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    [ _callerImage render: mainV bPlay: bPlay ];
+    [ _caller render: mainV bPlay: bPlay ];
+    [ _callerSecond render: mainV bPlay: bPlay ];
+    
+    [ _accpetBtn render: mainV bPlay: bPlay ];
+    [ _declineBtn render: mainV bPlay: bPlay ];
+
+    [ _timer invalidate ];
+    
+    BOOL bNoFlash = [[ self._params objectForKey:@"NoFlash" ] boolValue ];
+    
+    if( bPlay && !bNoFlash )
+        _timer = [ NSTimer scheduledTimerWithTimeInterval: 0.5 target:self selector:@selector(onTimerCome:) userInfo:nil repeats:YES ];
+    
+    return mainV;
 }
 
 -(id) getTransitionParam {
