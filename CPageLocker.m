@@ -4,7 +4,7 @@
 #import "Utils.h"
 
 @implementation CPageLocker
-@synthesize _callerImage,_caller,_callerSecond,_accpetBtn;
+@synthesize _callerImage,_caller,_callerSecond,_acceptBtn,_acceptBtnBack;
 
 - (id)initWithTemplate: (NSString *) templateName delegate:(id) delegate params:(NSDictionary *)params
 {
@@ -36,8 +36,11 @@
     _caller = [ [ CText alloc ] initWithText:@"Jon Walker" rect: [ params objectForKey:@"callerRect" ] color: textColor font: nameFont container: self ];
     _callerSecond = [ [ CText alloc ] initWithText:@"mobile" rect: [ params objectForKey:@"callerSecondRect" ]  color: textColor font: secondFont container:self ];
     
-    _accpetBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answer"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
-     [ _accpetBtn setLinkToEnd ];
+    _acceptBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answerBtn"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
+    _acceptBtn._swipeable = true;
+
+    _acceptBtnBack = [[ CImage alloc ] initWithIcon: [self getImageName:@"answerBack"] rect: [ params objectForKey:@"acceptBtnBackRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
+     [ _acceptBtn setLinkToEnd ];
     
 	return self;
 }
@@ -46,9 +49,12 @@
 {
     UIView * mainV = [ super render: parentView bPlay: bPlay ];
     
-    [ _accpetBtn render: mainV bPlay: bPlay ];
- //   [ __slideBtnBack render: mainV bPlay: bPlay ];
+    
+    [ _acceptBtnBack render: mainV bPlay: bPlay ];
     [ __slideBtn render:mainV bPlay:bPlay ];
+
+    [ _acceptBtn render: mainV bPlay: bPlay ];
+ //   [ __slideBtnBack render: mainV bPlay: bPlay ];
     
     [ self createImageButtonInView: mainV imageName:@"remind" rectName:@"remindRect" ];
     [ self createImageButtonInView: mainV imageName:@"message" rectName:@"messageRect" ];
@@ -71,7 +77,7 @@
 -(void) doAnimation
 {
     UIView * view = __slideBtn._view;
-    
+
     CALayer *maskLayer = [CALayer layer];
     UIImage *mask = [ Utils loadImage:@"shadow" templateName:@"unlock" ];
     maskLayer.contents = (id)mask.CGImage;
