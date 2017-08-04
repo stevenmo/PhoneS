@@ -3211,16 +3211,6 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "title": "My title",
                 ],
         ],
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     ]
 
 }
