@@ -17,6 +17,7 @@
     
     __slideBtn._linkPage = [ NSNumber numberWithInt: 1 ];
     
+    
     self._backgroundKeepAspect = false;
     UIColor * backColor = [ params objectForKey:@"ButtonColor"];
 
