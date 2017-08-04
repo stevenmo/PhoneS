@@ -4,7 +4,7 @@
 #import "Utils.h"
 
 @implementation CPageLocker
-@synthesize _callerImage,_caller,_callerSecond,_accpetBtn;
+@synthesize _callerImage,_caller,_callerSecond;
 
 - (id)initWithTemplate: (NSString *) templateName delegate:(id) delegate params:(NSDictionary *)params
 {
@@ -36,19 +36,12 @@
     _caller = [ [ CText alloc ] initWithText:@"Jon Walker" rect: [ params objectForKey:@"callerRect" ] color: textColor font: nameFont container: self ];
     _callerSecond = [ [ CText alloc ] initWithText:@"mobile" rect: [ params objectForKey:@"callerSecondRect" ]  color: textColor font: secondFont container:self ];
     
-    _accpetBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answer"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
-     [ _accpetBtn setLinkToEnd ];
-    
 	return self;
 }
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
     UIView * mainV = [ super render: parentView bPlay: bPlay ];
-    
-    [ _accpetBtn render: mainV bPlay: bPlay ];
- //   [ __slideBtnBack render: mainV bPlay: bPlay ];
-    [ __slideBtn render:mainV bPlay:bPlay ];
     
     [ self createImageButtonInView: mainV imageName:@"remind" rectName:@"remindRect" ];
     [ self createImageButtonInView: mainV imageName:@"message" rectName:@"messageRect" ];
@@ -63,6 +56,7 @@
     [ _caller render: mainV bPlay: bPlay ];
     [ _callerSecond render: mainV bPlay: bPlay ];
 
+    [ self setupSwipe: parentView bPlay:bPlay ];
     [ self doAnimation ];
     
     return mainV;
@@ -87,6 +81,48 @@
     [ maskLayer addAnimation:move forKey:@"x"];
     
     view.layer.mask = maskLayer;
+}
+
+-(void) setupSwipe:(UIView *)parentView bPlay: (BOOL) bPlay
+{
+    CRect * rect = [ self._params objectForKey:@"acceptBtnRect" ];
+    CGRect r = [ rect getRect: parentView.bounds ];
+    _swipeToAcceptView = [[ UIImageView alloc ] initWithFrame: r ];
+    [ parentView addSubview: _swipeToAcceptView ];
+    
+    UIImage * img = [ Utils loadImage:@"answer" templateName: self._templateName ];
+    img = [ Utils resizeImage:img maxW:r.size.width maxH:r.size.height bKeepScale:true ];
+    
+    UIEdgeInsets inset = UIEdgeInsetsMake( 0, 100, 0, 40);
+    img = [  img resizableImageWithCapInsets: inset ];
+    _swipeToAcceptView.image = img;
+    
+    _swipeToAcceptView.userInteractionEnabled = true;
+    _swipeToAcceptView.clipsToBounds = true;
+    
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanHandle:)];
+    [_swipeToAcceptView addGestureRecognizer: recognizer ];
+    
+    __slideBtn._rect = MYRECT(25,0,0,0);
+    [ __slideBtn render: _swipeToAcceptView  bPlay:bPlay ];
+}
+
+- (void) onPanHandle:(UIPanGestureRecognizer *)recognizer {
+    
+    UIView * view = _swipeToAcceptView;
+    
+    CGPoint translation = [recognizer translationInView:view.superview];
+    CGFloat delta = translation.x;
+    
+    CGRect frame = view.frame;
+    if ( frame.size.width - delta <= 140 )
+        delta = frame.size.width - 140;
+    
+    frame.origin.x += delta;
+    frame.size.width -= delta;
+    view.frame = frame;
+    
+    [recognizer setTranslation:CGPointZero inView: view.superview];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
