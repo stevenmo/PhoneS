@@ -17,7 +17,6 @@
     
     __slideBtn._linkPage = [ NSNumber numberWithInt: 1 ];
     
-    
     self._backgroundKeepAspect = false;
     UIColor * backColor = [ params objectForKey:@"ButtonColor"];
 
@@ -109,6 +108,11 @@
 }
 
 - (void) onPanHandle:(UIPanGestureRecognizer *)recognizer {
+    
+    if( recognizer.state == UIGestureRecognizerStateEnded ) {
+        
+        NSLog(@"UIGestureRecognizerStateEnded");
+    }
     
     UIView * view = _swipeToAcceptView;
     
