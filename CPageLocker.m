@@ -13,9 +13,10 @@
     int textColor = [[ params objectForKey:@"textColor" ] intValue ];
     UIFont * sliderFont = [ params objectForKey:@"sliderFont" ];
     
-    __slideBtn = [ [ CText alloc ] initWithText:@"slide to answer" rect: [ params objectForKey:@"sliderRect" ] color: textColor font: sliderFont container: self ];
+    __slideBtn = [ [ CText alloc ] initWithText:@"slide to answer" rect: [ params objectForKey:@"sliderRect" ] color: textColor font: sliderFont container: self];
     
     __slideBtn._linkPage = [ NSNumber numberWithInt: 1 ];
+
     
     self._backgroundKeepAspect = false;
     UIColor * backColor = [ params objectForKey:@"ButtonColor"];
@@ -87,9 +88,11 @@
 {
     CRect * rect = [ self._params objectForKey:@"acceptBtnRect" ];
     CGRect r = [ rect getRect: parentView.bounds ];
+    _ogRect = r;
     _swipeToAcceptView = [[ UIImageView alloc ] initWithFrame: r ];
     [ parentView addSubview: _swipeToAcceptView ];
     
+
     UIImage * img = [ Utils loadImage:@"answer" templateName: self._templateName ];
     img = [ Utils resizeImage:img maxW:r.size.width maxH:r.size.height bKeepScale:true ];
     
@@ -100,6 +103,7 @@
     _swipeToAcceptView.userInteractionEnabled = true;
     _swipeToAcceptView.clipsToBounds = true;
     
+    
     UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanHandle:)];
     [_swipeToAcceptView addGestureRecognizer: recognizer ];
     
@@ -108,11 +112,6 @@
 }
 
 - (void) onPanHandle:(UIPanGestureRecognizer *)recognizer {
-    
-    if( recognizer.state == UIGestureRecognizerStateEnded ) {
-        
-        NSLog(@"UIGestureRecognizerStateEnded");
-    }
     
     UIView * view = _swipeToAcceptView;
     
@@ -123,6 +122,16 @@
     if ( frame.size.width - delta <= 140 )
         delta = frame.size.width - 140;
     
+ 
+
+    
+    if(recognizer.state == UIGestureRecognizerStateEnded){
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            view.frame = _ogRect;
+        }
+        completion:^(BOOL finished){}];
+        return;
+    }
     frame.origin.x += delta;
     frame.size.width -= delta;
     view.frame = frame;

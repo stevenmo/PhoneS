@@ -16,5 +16,8 @@
 @property (nonatomic, strong) CText *_slideBtnBack;
 
 @property (nonatomic, strong) CText *_slideBtn;
+@property (nonatomic) CGRect ogRect;
+
+
 
 @end
