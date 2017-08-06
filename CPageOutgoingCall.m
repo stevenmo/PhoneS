@@ -57,6 +57,7 @@
     [ _caller render: mainV bPlay: bPlay ];
     [ _callerSecond render: mainV bPlay: bPlay ];
     
+    [ _endCallBtn setTarget:self sel:@selector(onHungup:) container: self ];
     [ _endCallBtn render: mainV bPlay: bPlay ];
 
     int top = [[ self._params objectForKey: @"buttonTop" ] intValue ];
@@ -244,16 +245,18 @@
     return false;
 }
 
-/*
--(void) onAccepted:(id) sender
+-(void) onHungup:(id) sender
 {
-    NSLog(@"onAccepted");
+    [UIView animateWithDuration:1.0f animations:^{
+        
+        self._view.alpha = 0.3;
+        
+    } completion:^(BOOL finished) {
+        
+        [ _endCallBtn onLinkClicked: self ];
+        
+    }];
 }
-     
--(void) onDeclined:(id) sender
-{
-    NSLog(@"onDeclined");
-}*/
 
 -(void) copyFrom: (CPage *) page {
     
