@@ -2901,6 +2901,8 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"incoming_call9" ];
     [ group addObject: st ];
+    st = [[ CSceneTemplate alloc ] initWithName: @"IOS10 alt" ID: @"unlock" ];
+    [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS8/9" ID: @"incoming_call6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS7" ID: @"incoming_call5" ];
@@ -3176,9 +3178,9 @@ static NSString * s_pageNames[][7] = {
     [ group addObject: st ];
 #endif
 
-    group = [ self addGroup: @"Unlock Home Screen" ];
-    st = [[ CSceneTemplate alloc ] initWithName: @"Unlock Screen" ID: @"unlock" ];
-    [ group addObject: st ];
+//    group = [ self addGroup: @"Unlock Home Screen" ];
+//    st = [[ CSceneTemplate alloc ] initWithName: @"Unlock Screen" ID: @"unlock" ];
+//    [ group addObject: st ];
     
     group = [ self addGroup: @"Camera" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"camera3" ];
