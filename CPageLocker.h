@@ -6,7 +6,6 @@
 @interface CPageLocker : CPage
 {
     UIView * _lockerAnimationView;
-    UIImageView * _swipeToAcceptView;
 }
 
 @property (nonatomic, strong) CImage *_callerImage;
@@ -16,8 +15,6 @@
 @property (nonatomic, strong) CText *_slideBtnBack;
 
 @property (nonatomic, strong) CText *_slideBtn;
-@property (nonatomic) CGRect ogRect;
-
-
+@property (nonatomic, strong) CImage *_accpetBtn;
 
 @end

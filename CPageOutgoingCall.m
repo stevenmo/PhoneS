@@ -140,35 +140,9 @@
     }
 }
 
-/*
- - (UIImage*) imageWithImage:(UIImage*) source rotatedByHue:(CGFloat) deltaHueRadians;
-{
-    // Create a Core Image version of the image.
-    CIImage *sourceCore = [CIImage imageWithCGImage:[source CGImage]];
-    
-    // Apply a CIHueAdjust filter
-    CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
-    [hueAdjust setDefaults];
-    [hueAdjust setValue: sourceCore forKey: @"inputImage"];
-    [hueAdjust setValue: [NSNumber numberWithFloat: deltaHueRadians] forKey: @"inputAngle"];
-    CIImage *resultCore = [hueAdjust valueForKey: @"outputImage"];
-    
-    // Convert the filter output back into a UIImage.
-    // This section is from http://stackoverflow.com/a/7797578/1318452
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef resultRef = [context createCGImage:resultCore fromRect:[resultCore extent]];
-    UIImage *result = [UIImage imageWithCGImage:resultRef];
-    CGImageRelease(resultRef);
-    
-
-    
-    return result;
-}
-*/
 -(void) runAnimation: (float) orgPos
 {
     UIButton * btn = (UIButton *)_endCallBtn._view;
-    //   UIImage * image1 = [ Utils loadImage:@"answer" templateName:self._templateName ];
     UIImage * image = [ Utils loadImage:@"end-call" templateName:self._templateName ];
     NSMutableArray* imgArray = [[NSMutableArray alloc] init];
 
@@ -176,15 +150,6 @@
         UIImage* imageCopy = [Utils loadImage:[NSString stringWithFormat:@"%d.png",i] templateName:self._templateName];
         [imgArray addObject:(id)imageCopy.CGImage];
     }
-    //    UIImage * image1 = [ Utils loadImage:@"end-call1" templateName:self._templateName ];
-//    UIImage * image2 = [ Utils loadImage:@"end-call2" templateName:self._templateName ];
-//    UIImage * image3= [ Utils loadImage:@"end-call3" templateName:self._templateName ];
-//    UIImage * image4 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
-//    UIImage * image5 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
-//    UIImage * image6 = [ Utils loadImage:@"end-call4" templateName:self._templateName ];
-    
-//    UIImage * image1 = [ Utils loadImage:@"end-call green" templateName:self._templateName ];
-//    image = [ self imageWithImage:image rotatedByHue: 90 ];
     
     UIImageView * fView = [[ UIImageView alloc ] initWithImage:image ];
     fView.frame = btn.bounds;
@@ -197,7 +162,8 @@
     btn.frame = CGRectMake(orgPos, frame.origin.y, frame.size.width, frame.size.height );
     
     float duration = 1.0;
-    float rotations = 1.0;
+    
+/*    float rotations = 1.0;
     
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -206,8 +172,7 @@
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = 1;
 
-    [ btn.layer addAnimation:rotationAnimation forKey:@"rotationAnimation" ];
-    
+    [ btn.layer addAnimation:rotationAnimation forKey:@"rotationAnimation" ]; */
 
     CABasicAnimation *move;    move          = [CABasicAnimation animationWithKeyPath:@"position.x"];
     move.byValue  = @( nowPos - orgPos );
@@ -217,58 +182,12 @@
     [ btn.layer addAnimation:move forKey:@"x"];
 
     CAKeyframeAnimation *colorChange = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
-//    colorChange.values = [NSArray arrayWithObjects:image1,image2,image3,image4, nil];
-    
-//    NSMutableArray *animationSequenceArray = [[NSMutableArray alloc] init];
-//    for(int i = 1; i <= 15; i++)
-//    {
-//        UIImage* photo = [UIImage imageNamed:[NSString stringWithFormat:@"%04d.png",i]];
-//        [animationSequenceArray addObject:photo];
-//    }
-//    [animationSequenceArray addObject:(id)image1.CGImage];
-//    [animationSequenceArray addObject:(id)image2.CGImage];
-//    [animationSequenceArray addObject:(id)image3.CGImage];
-//    [animationSequenceArray addObject:(id)image4.CGImage];
-//    [animationSequenceArray addObject:(id)image5.CGImage];
-//    [animationSequenceArray addObject:(id)image6.CGImage];
     colorChange.calculationMode = kCAAnimationDiscrete;
     colorChange.values = imgArray;
     colorChange.duration = duration;
     colorChange.repeatCount = 1.0f;
     colorChange.removedOnCompletion = NO;
     [fView.layer addAnimation:colorChange forKey:@"contents"];
-    
-    /*
-    CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
-    keyframeAnimation.values = [ NSArray arrayWithObjects: image1, image, nil ];
-    
-    keyframeAnimation.repeatCount = 1.0f;
-    keyframeAnimation.duration = duration;
-    
-    keyframeAnimation.removedOnCompletion = NO;
-    
-    [fView.layer addAnimation:keyframeAnimation forKey:@"flingAnimation"];
-
-    UIColor *fromColor = [UIColor redColor];
-    UIColor *toColor = [UIColor yellowColor];
-    CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"tintColor"];
-    colorAnimation.duration = 1.0;
-    colorAnimation.fromValue = (id)fromColor.CGColor;
-    colorAnimation.toValue = (id)toColor.CGColor;
-    
-    [ btn.layer addAnimation:move forKey:@"tintColor"];
-*/
-  /*  CABasicAnimation* fadeAnimation;
-    fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeAnimation.fromValue = [NSNumber numberWithFloat:1.0f];
-    fadeAnimation.toValue = [NSNumber numberWithFloat:0.0f];
-    fadeAnimation.duration = duration;
-    fadeAnimation.cumulative = YES;
-    fadeAnimation.repeatCount = 1;
-    fadeAnimation.fillMode = kCAFillModeBoth;
-    fadeAnimation.removedOnCompletion = NO;
-    
-    [ fView.layer addAnimation:fadeAnimation forKey:@"fadeAnimation" ]; */
 }
 
 -(void) createButtons: (CGRect *) posArr mainV: (UIView *)mainV
