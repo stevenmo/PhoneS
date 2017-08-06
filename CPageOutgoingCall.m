@@ -147,7 +147,7 @@
     UIImage * image = [ Utils loadImage:@"end-call" templateName:self._templateName ];
     NSMutableArray* imgArray = [[NSMutableArray alloc] init];
 
-    for (int i = 1; i <= 15; i++) {
+    for (int i = 1; i <= 29; i++) {
         UIImage* imageCopy = [Utils loadImage:[NSString stringWithFormat:@"%d.png",i] templateName:self._templateName];
         [imgArray addObject:(id)imageCopy.CGImage];
     }
@@ -253,7 +253,7 @@
         
     } completion:^(BOOL finished) {
         
-        [ _endCallBtn onLinkClicked: self ];
+//        [ _endCallBtn onLinkClicked: self ];
         
     }];
 }
