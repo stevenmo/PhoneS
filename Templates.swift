@@ -3149,8 +3149,10 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                 "iPhone6" : [
                     "className" : "CPageSocialMedia",
                     "font": MYFONT(14),
+                    "topBarBackgroud": MYINT(0xffffff),
+                    "topBarColor": MYINT(0x000000),
                     "hasOptions": MYINT(1),
-                    "theme": "theme4",
+                    "theme": "theme9",
                 ],
         ],
         "gallery" :
@@ -3211,6 +3213,16 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "title": "My title",
                 ],
         ],
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     ]
 
 }
