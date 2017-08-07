@@ -6,6 +6,7 @@
 #import "EditTextRowVC.h"
 #import "CScene.h"
 #import "CSocialMediaPost.h"
+#import "ImageUtil.h"
 
 @implementation CPageSocialMedia
 
@@ -19,9 +20,6 @@
     __titleBar._preferPureColor = true;
     __titleBar._needImportInstruction = true;
     __titleBar._removeable = true;
-    
-    self._topBar._background = [ params objectForKey:@"topBarBackground" ];
-    self._topBar._color = [ params objectForKey:@"topBarColor" ];
     
     __bottomBar = [[ CImage alloc ] initWithIcon: [self getImageName:@"bottomBar"] rect:MYRECTI(0,-44,0,44) target:nil sel:nil container: self optionIcons: nil backgroundColor: 0x000000 ];
     __bottomBar._preferPureColor = true;
@@ -47,7 +45,7 @@
         
         NSString * name = [ NSString stringWithFormat: @"social/%@", sIconNames[i] ];
         _bottomIcons[i] = [[ CImage alloc ] initWithIcon: name rect: MYRECTI(0,y,40,40) target:nil sel:nil container: self optionIcons:nil backgroundColor: nil ];
-        _bottomIcons[i]._removeable = true;
+        //_bottomIcons[i]._removeable = true;
         _bottomIcons[i]._importable = true;
         _bottomIcons[i]._needImportInstruction = true;
         
@@ -58,9 +56,10 @@
 
 -(void) updateBottomIconPos
 {
-    float x = 16;
     float w = [ Utils getScreenSize ].width;
-    w = w / BottomIconsNUMB;
+    int gap = ( w - BottomIconsNUMB * 40 ) / BottomIconsNUMB;
+    w = gap + 40;
+    int x = gap/2;
     
     for( int i=0; i < BottomIconsNUMB; i++ ) {
         
@@ -74,8 +73,9 @@
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
-    int top = self._topBar._hidden? 0: self._topBar._height;
+    _cells = [[ NSMutableArray alloc ] init ];
     
+    int top = self._topBar._hidden? 0: self._topBar._height;
     __titleBar._rect._posY = top;
     
     top += __titleBar._rect._height;
@@ -86,7 +86,10 @@
 
     [ __titleBar render: mainV bPlay:bPlay ];
     [ __titler render: __titleBar._view bPlay:bPlay ];
+    
     [ __bottomBar render: mainV bPlay:bPlay ];
+    
+    [ self updateBottomIconPos ];
     
     for( int i=0; i < BottomIconsNUMB; i++ ) {
         [ _bottomIcons[i] render: mainV bPlay: bPlay ];
@@ -103,6 +106,8 @@
     
     if ( !bPlay )
         [ self setupFooterView: __tableView ];
+    else
+        [ self prepareCells ];
     
     return mainV;
 }
@@ -135,17 +140,18 @@
     
     UIView * view = [[ UIView alloc ] initWithFrame:CGRectMake(0,0, fullW, 240 ) ];
     
-    UIView * label = [ Utils createClickableLabel:@"Add a new section" frame:CGRectMake(0,0,fullW, 35 ) color:[UIColor blueColor ] font: MYFONT(14) target:self sel:@selector(onAddPostClicked:) labelTag:0 ];
+    UIView * label = [ Utils createClickableLabel:@"Add a new section" frame:CGRectMake(0,0,fullW, 30 ) color:[UIColor blueColor ] font: MYFONT(14) target:self sel:@selector(onAddPostClicked:) labelTag:0 ];
+    [ view addSubview: label ];
+
+    label = [ Utils createClickableLabel:@"Duplicate last section" frame:CGRectMake(0,30,fullW, 30 ) color:[UIColor blueColor ] font: MYFONT(14) target:self sel:@selector(onDuplicateSectionClicked:) labelTag:0 ];
     [ view addSubview: label ];
     
-    label = [ Utils createClickableLabel:@"Remove the last section" frame:CGRectMake(0,35,fullW, 35 ) color:[UIColor blueColor ] font: MYFONT(14) target:self sel:@selector(onAddPostClicked:) labelTag:0 ];
+    label = [ Utils createClickableLabel:@"Remove the last section" frame:CGRectMake(0,60,fullW, 30 ) color:[UIColor blueColor ] font: MYFONT(14) target:self sel:@selector(onRemoveSectionClicked:) labelTag:0 ];
     [ view addSubview: label ];
     
-    [ Utils setupSingleTapHandler: label target:self sel:@selector(onRemoveSectionClicked:) ];
+    [ Utils createLabelInView:view text:@"Top menu" frame: CGRectMake(10,110,100,30) color:[UIColor blackColor ] font: MYFONT(14) ];
     
-    [ Utils createLabelInView:view text:@"Top menu" frame: CGRectMake(10,80,100,30) color:[UIColor blackColor ] font: MYFONT(14) ];
-    
-    UISwitch * sw = [[ UISwitch alloc ] initWithFrame:CGRectMake(fullW-60,80,60,30) ];
+    UISwitch * sw = [[ UISwitch alloc ] initWithFrame:CGRectMake(fullW-60,110,60,30) ];
     sw.on = !self._topBar._hidden;
     [sw addTarget: self action: @selector(onTopMenuSwitch:) forControlEvents: UIControlEventValueChanged ];
     [ view addSubview: sw ];
@@ -163,10 +169,32 @@
     [ self._delegate onContentRefresh ];
 }
 
+-(void) onDuplicateSectionClicked: (id) sender
+{
+    if( __postObjects.count > 0 )
+    {
+        CSocialMediaPost * post = [ CSocialMediaPost copyFrom: __postObjects.lastObject ];
+        post._container = self;
+        [__postObjects addObject: post ];
+        [ __tableView reloadData ];
+    }
+}
+
 -(void) onRemoveSectionClicked: (id) sender
 {
     [ __postObjects removeLastObject ];
     [ __tableView reloadData ];
+}
+
+-(BOOL) removeBottomIcon: (CElement *)obj
+{
+    for( int i=0; i < BottomIconsNUMB; i++ ) {
+        if ( obj == _bottomIcons[i] ) {
+            [ (CImage *)obj remove ];
+            return true;
+        }
+    }
+    return false;
 }
 
 -(bool) onMemberRemoved:(CElement *)obj
@@ -177,7 +205,9 @@
     {
         [__titleBar._view removeFromSuperview ];
         __titleBar = nil;
-    }
+    } //else
+      //  [ self removeBottomIcon: obj ];
+        
     [ self._delegate onContentRefresh ];
     
     return true;
@@ -186,6 +216,74 @@
 -(void) onAddPostClicked: (id) sender
 {
     [ self onOptionClicked: 0 ];
+}
+
+-(UIImage *) captureScreenshot: ( UIView *) mainView fileName: (NSString *) fileName {
+    
+    UIView * view = [ self render: mainView bPlay: true ];
+    CGFloat totalH = __tableView.contentSize.height;
+    CGFloat h = view.frame.size.height;
+    CGFloat hNow = h;
+    UIImage * imgTop, *imgBottom;
+    
+    int topBarHeight = self._topBar._hidden? 0: self._topBar._height;
+    topBarHeight += __titleBar._rect._height;
+    
+    NSString *sPath = [ fileName stringByDeletingPathExtension ];
+    int index = 0;
+    
+    for ( CGFloat yy = 0; yy < totalH;  )
+    {
+        if ( yy > 0 )
+            __tableView.contentOffset = CGPointMake( 0, yy - topBarHeight - 44 );
+        
+        UIImage * img = [ Utils captureView: view ];
+        
+        if ( yy > 0 )
+        {
+            hNow = h - topBarHeight - 44 - 44;
+            img = [ Utils cropImage:img cropRect: CGRectMake(0,topBarHeight+44,img.size.width,hNow ) ];
+        } else {
+            hNow = h - 44 - 44;
+            imgTop = [ Utils cropImage:img cropRect: CGRectMake(0,0,img.size.width,topBarHeight ) ];
+            imgBottom = [ Utils cropImage:img cropRect: CGRectMake(0,h-44,img.size.width,44 ) ];
+            img = [ Utils cropImage:img cropRect: CGRectMake(0,0,img.size.width,hNow ) ];
+        }
+
+        CGSize newImageSize;
+        
+        if ( yy == 0 )
+        {
+            newImageSize = CGSizeMake( img.size.width, totalH + topBarHeight + 44 );
+            //UIGraphicsBeginImageContextWithOptions(newImageSize, NO, 0 );
+        }
+        else
+            yy = yy;
+        
+        //[img drawAtPoint:CGPointMake(0,yy)];
+        NSString *sName = [ NSString stringWithFormat:@"%@_%d.jpg", sPath, index ];
+        [ Utils saveJPGImage:img fileName: sName ];
+        yy += hNow;
+        index++;
+    }
+    
+    [ view removeFromSuperview ];
+
+    [imgBottom drawAtPoint:CGPointMake(0,totalH + topBarHeight)];
+    
+    //UIImage *imgFull = UIGraphicsGetImageFromCurrentImageContext();
+    //UIGraphicsEndImageContext();
+    //[ Utils saveJPGImage:imgFull fileName: fileName ];
+    
+    if ( imgTop != nil ) {
+        
+        NSString *sPath = [ fileName stringByDeletingPathExtension ];
+        NSString *sName = [ NSString stringWithFormat:@"%@_top.jpg", sPath ];
+        [ Utils saveJPGImage:imgTop fileName: sName ];
+        sName = [ NSString stringWithFormat:@"%@_bottom.jpg", sPath ];
+        [ Utils saveJPGImage:imgBottom fileName: sName ];
+    }
+    return nil;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -225,6 +323,21 @@
     return self;
 }
 
+-(void) prepareCells
+{
+    for( int i= 0; i < __postObjects.count ; i++ )
+    {
+        CSocialMediaPost * obj = __postObjects[i];
+        [ _cells addObject: [ obj render: __tableView  bPlay: true ] ];
+    }
+}
+
+-(void) playEnd
+{
+    [ super playEnd ];
+    _cells = nil;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return __postObjects.count;
@@ -237,8 +350,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSocialMediaPost * obj = __postObjects[indexPath.section];
-    return [ obj render: tableView  bPlay: ![ self._delegate isEditing ] ];
+    if ( indexPath.section < _cells.count )
+        return _cells[indexPath.section];
+    else {
+        CSocialMediaPost * obj = __postObjects[indexPath.section];
+        return [ obj render: tableView  bPlay: ![ self._delegate isEditing ] ];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
