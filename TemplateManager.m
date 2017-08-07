@@ -2901,7 +2901,7 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"incoming_call9" ];
     [ group addObject: st ];
-    st = [[ CSceneTemplate alloc ] initWithName: @"IOS10 alt" ID: @"unlock" ];
+    st = [[ CSceneTemplate alloc ] initWithName: @"IOS10 alt" ID: @"unlock9" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS8/9" ID: @"incoming_call6" ];
     [ group addObject: st ];
