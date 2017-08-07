@@ -48,7 +48,11 @@
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
-    UIView * mainV = [ super render: parentView bPlay: bPlay ];
+    UIView * backView = [[ UIView alloc ] initWithFrame:parentView.bounds ];
+    backView.backgroundColor = [ UIColor blackColor ];
+    [ parentView addSubview: backView ];
+    
+    UIView * mainV = [ super render: backView bPlay: bPlay ];
 
     [ self createImageButtonInView:mainV imageName:@"top-bar" rectName:@"topBarRect" ];
     [ self createImageButtonInView:mainV imageName:@"bottom-bar" rectName:@"bottomBarRect" ];
@@ -247,13 +251,15 @@
 
 -(void) onHungup:(id) sender
 {
-    [UIView animateWithDuration:1.0f animations:^{
+    _endCallBtn._view.alpha = 0.5;
+    
+    [UIView animateWithDuration:0.5 animations:^{
         
-        self._view.alpha = 0.3;
+        self._view.alpha = 0.5;
         
     } completion:^(BOOL finished) {
         
-//        [ _endCallBtn onLinkClicked: self ];
+        [ _endCallBtn onLinkClicked: self ];
         
     }];
 }

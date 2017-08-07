@@ -70,6 +70,12 @@
     return mainV;
 }
 
+-(id) getTransitionParam {
+    
+    CGRect r = _accpetBtn._view.frame;
+    return [ NSNumber numberWithFloat: r.origin.x + r.size.width ];
+}
+
 -(void) doAnimation
 {
     UIView * view = __slideBtn._view;
