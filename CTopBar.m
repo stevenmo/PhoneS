@@ -11,6 +11,8 @@
 {
     self = [ super init ];
     
+    __themeID = themeId;
+    
     //NSArray * icons = [ NSArray arrayWithObjects:@"incoming_call1/battery1", @"incoming_call1/battery2", @"incoming_call1/battery3", nil ];
     _battery = [ [ CBattery alloc ] initWithIcon:[ Utils getImageName:  @"battery" templateName: themeId ] color:batteryColor rect: batteryRect  withPercentage:false percentageColor:color container:self  optionIcons: nil backgroundColor: backgroundColor ];
 
@@ -59,8 +61,10 @@
 
     self._view = mainV;
     
-    if( !bPlay )
+    if( !bPlay ){
         [ Utils setSingleTapHandlerToView: mainV delegate: nil target:self sel:@selector(onBarClicked:) ];
+        [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
+    }
     
     return [super render: parentView bPlay:bPlay ];
 }
@@ -80,7 +84,18 @@
                    }
                  onClickedButton:^(UIActionSheet *actionSheet, NSUInteger index) {
                      
-                     /// invert here.
+                     if(_color == 0xffffff)
+                     {
+                         _color = 0x000000;
+                         _background = [ Utils getImageName: @"top-bar" templateName: __themeID ];
+                     }
+                    else
+                    {
+                        _color = 0xffffff;
+                        _background = [ Utils getImageName: @"top-barBlack" templateName: __themeID ];
+                        
+                    }
+                    
                      
                  }];
 }
