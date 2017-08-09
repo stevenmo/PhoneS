@@ -2,6 +2,7 @@
 #import "utils.h"
 #import "Preference.h"
 #import "UIActionSheet+Blocks.h"
+#import "CPage.h"
 
 @implementation CTopBar
 
@@ -10,8 +11,6 @@
 -(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
 {
     self = [ super init ];
-    
-    __themeID = themeId;
     
     //NSArray * icons = [ NSArray arrayWithObjects:@"incoming_call1/battery1", @"incoming_call1/battery2", @"incoming_call1/battery3", nil ];
     _battery = [ [ CBattery alloc ] initWithIcon:[ Utils getImageName:  @"battery" templateName: themeId ] color:batteryColor rect: batteryRect  withPercentage:false percentageColor:color container:self  optionIcons: nil backgroundColor: backgroundColor ];
@@ -61,10 +60,8 @@
 
     self._view = mainV;
     
-    if( !bPlay ){
+    if( !bPlay )
         [ Utils setSingleTapHandlerToView: mainV delegate: nil target:self sel:@selector(onBarClicked:) ];
-        [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
-    }
     
     return [super render: parentView bPlay:bPlay ];
 }
@@ -84,19 +81,8 @@
                    }
                  onClickedButton:^(UIActionSheet *actionSheet, NSUInteger index) {
                      
-                     if(_color == 0xffffff)
-                     {
-                         _color = 0x000000;
-                         _background = [ Utils getImageName: @"top-bar" templateName: __themeID ];
-                     }
-                    else
-                    {
-                        _color = 0xffffff;
-                        _background = [ Utils getImageName: @"top-barBlack" templateName: __themeID ];
-                        
-                    }
-                    
-                     
+                     CPage * page = (CPage *)self._container;
+                     [ page invertTopBar ];
                  }];
 }
 

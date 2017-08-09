@@ -16,7 +16,6 @@
 
 @property (nonatomic) int _color;
 @property (nonatomic) int _height;
-@property (nonatomic) NSString* _themeID;
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay;
 
