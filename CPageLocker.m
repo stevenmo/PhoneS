@@ -5,7 +5,7 @@
 #import "Utils.h"
 
 @implementation CPageLocker
-@synthesize _callerImage,_caller,_callerSecond,_accpetBtn;
+@synthesize _callerImage,_caller,_callerSecond,_accpetBtn,_callBtn;
 
 - (id)initWithTemplate: (NSString *) templateName delegate:(id) delegate params:(NSDictionary *)params
 {
@@ -39,6 +39,9 @@
     _accpetBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answer"] rect: [ params objectForKey:@"acceptBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
     [ _accpetBtn setLinkToEnd ];
     
+    _callBtn = [[ CImage alloc ] initWithIcon: [self getImageName:@"answerBtn"] rect: [ params objectForKey:@"callBtnRect" ] target:nil sel:nil container: self optionIcons: nil backgroundColor:backColor ];
+    [ _callBtn setLinkToEnd ];
+    
 	return self;
 }
 
@@ -61,6 +64,8 @@
 
     [ _accpetBtn setTarget:self sel:@selector(onAccepted:) container: self ];
     [ _accpetBtn render: mainV bPlay: bPlay ];
+    
+    [ _callBtn render: mainV bPlay: bPlay ];
     
     [ self setupSwipe: parentView bPlay:bPlay ];
     
@@ -104,62 +109,122 @@
     CRect * rect = [ self._params objectForKey:@"acceptBtnRect" ];
     CGRect r = [ rect getRect: parentView.bounds ];
     
-    UIButton * btn = (UIButton *)_accpetBtn._view;
+    UIButton * btn  = (UIButton *)_accpetBtn._view;
+    UIButton * call = (UIButton *)_callBtn._view;
 
     UIImage * img = [ Utils loadImage:@"answer" templateName: self._templateName ];
     img = [ Utils resizeImage:img maxW:r.size.width maxH:r.size.height bKeepScale:true ];
     
-    UIEdgeInsets inset = UIEdgeInsetsMake( 0, 100, 0, 40);
+    UIEdgeInsets inset = UIEdgeInsetsMake( 0, 40, 0, 40);
     img = [  img resizableImageWithCapInsets: inset ];
     
     [ btn setBackgroundImage: img forState: UIControlStateNormal ];
     
+    UIImage * callImg = [ Utils loadImage:@"answerBtn" templateName: self._templateName ];
+    callImg = [ Utils resizeImage:callImg maxW:r.size.width maxH:r.size.height bKeepScale:true ];
+    [ call setBackgroundImage: callImg forState: UIControlStateNormal ];
+    
     if ( bPlay ) {
-        UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanHandle:)];
-        [ btn addGestureRecognizer: recognizer ];
+//        UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanHandle:)];
+        UIPanGestureRecognizer *recognizerCall = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onCallBtn:)];
+//        [ btn addGestureRecognizer: recognizer ];
+        [btn addGestureRecognizer: recognizerCall ];
     }
     btn.clipsToBounds = true;
+    call.clipsToBounds = true;
     
     __slideBtn._rect = MYRECT(25,0,0,0);
     [ __slideBtn render: btn  bPlay:bPlay ];
     __slideBtn._view.userInteractionEnabled = false;
+    _callBtn._view.userInteractionEnabled = false;
 }
-
-- (void) onPanHandle:(UIPanGestureRecognizer *)recognizer {
+- (void) onCallBtn : (UIPanGestureRecognizer *)recognizerCall {
     
-    UIView * view = recognizer.view;
-    
-    CRect * rect = [ self._params objectForKey:@"acceptBtnRect" ];
+    UIView * view = _callBtn._view;
+    CRect * rect = [ self._params objectForKey:@"callBtnRect" ];
     CGRect r = [ rect getRect: self._view.bounds ];
     
-    CGPoint translation = [recognizer translationInView:view.superview];
+    
+    UIView * view2 = recognizerCall.view;
+    CRect * rect2 = [ self._params objectForKey:@"acceptBtnRect" ];
+    CGRect r2 = [ rect2 getRect: self._view.bounds ];
+    
+    
+    CGPoint translation = [recognizerCall translationInView:view.superview];
     CGFloat delta = translation.x;
     
     CGRect frame = view.frame;
-    if ( frame.size.width - delta <= 140 )
-        delta = frame.size.width - 140;
-
-    frame.origin.x += delta;
-    frame.size.width -= delta;
+    CGRect frame2 = view2.frame;
     
-    if(recognizer.state == UIGestureRecognizerStateEnded){
+    if (frame.origin.x < 250){
+        frame.origin.x += delta;
+//        delta = frame2.size.width - 100;
+    }
+    if ( frame2.size.width - delta <= 86 )
+            delta = frame2.size.width - 86;
+    
+    frame2.origin.x += delta;
+    frame2.size.width -= delta;
+    
+    
+    view.frame = frame;
+    view2.frame = frame2;
+    if(recognizerCall.state == UIGestureRecognizerStateEnded){
         
-        if ( frame.size.width < 150 && (_accpetBtn._linkPage.intValue != PAGE_END ) )
+        if ( frame.origin.x < 200 && ((_callBtn._linkPage.intValue != PAGE_END )||(_accpetBtn._linkPage.intValue != PAGE_END)) )
         {
             _dragReleasePos = frame.origin.x;
-            [ _accpetBtn onLinkClicked: self ];
+            [ _callBtn onLinkClicked: self ];
             return;
         }
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             view.frame = r;
+            view2.frame = r2;
         }
-        completion:^(BOOL finished){}];
+                         completion:^(BOOL finished){}];
         return;
     }
-    view.frame = frame;
+
     
-    [recognizer setTranslation:CGPointZero inView: view.superview];
+//    [recognizerCall setTranslation:CGPointZero inView: view.superview];
+    [recognizerCall setTranslation:CGPointZero inView: view2.superview];
+    
 }
+//- (void) onPanHandle:(UIPanGestureRecognizer *)recognizer {
+//    
+//    UIView * view = recognizer.view;
+//    
+//    CRect * rect = [ self._params objectForKey:@"acceptBtnRect" ];
+//    CGRect r = [ rect getRect: self._view.bounds ];
+//    
+//    CGPoint translation = [recognizer translationInView:view.superview];
+//    CGFloat delta = translation.x;
+//    
+//    CGRect frame = view.frame;
+//    if ( frame.size.width - delta <= 140 )
+//        delta = frame.size.width - 140;
+//
+//    frame.origin.x += delta;
+//    frame.size.width -= delta;
+//    
+//    if(recognizer.state == UIGestureRecognizerStateEnded){
+//        
+//        if ( frame.size.width < 150 && (_accpetBtn._linkPage.intValue != PAGE_END ) )
+//        {
+//            _dragReleasePos = frame.origin.x;
+//            [ _accpetBtn onLinkClicked: self ];
+//            return;
+//        }
+//        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+//            view.frame = r;
+//        }
+//        completion:^(BOOL finished){}];
+//        return;
+//    }
+//    view.frame = frame;
+//    
+//    [recognizer setTranslation:CGPointZero inView: view.superview];
+//}
 
 - (void) onAccepted:(id) sender
 {
