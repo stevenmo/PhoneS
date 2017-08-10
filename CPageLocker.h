@@ -5,7 +5,7 @@
 
 @interface CPageLocker : CPage
 {
-    UIView * _lockerAnimationView;
+    int _dragReleasePos;
 }
 
 @property (nonatomic, strong) CImage *_callerImage;

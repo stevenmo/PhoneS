@@ -72,8 +72,10 @@
 
 -(id) getTransitionParam {
     
-    CGRect r = _accpetBtn._view.frame;
-    return [ NSNumber numberWithFloat: r.origin.x + r.size.width ];
+    if ( _dragReleasePos > 0 )
+        return [ NSNumber numberWithInt: _dragReleasePos ];
+    
+    return nil;
 }
 
 -(void) doAnimation
@@ -81,7 +83,7 @@
     UIView * view = __slideBtn._view;
     
     CALayer *maskLayer = [CALayer layer];
-    UIImage *mask = [ Utils loadImage:@"shadow" templateName:@"unlock" ];
+    UIImage *mask = [ Utils loadImage:@"shadow" templateName: self._templateName ];
     maskLayer.contents = (id)mask.CGImage;
     maskLayer.frame = CGRectMake(-view.bounds.size.width,0,view.bounds.size.width*2,view.bounds.size.height);
     
@@ -144,6 +146,7 @@
         
         if ( frame.size.width < 150 && (_accpetBtn._linkPage.intValue != PAGE_END ) )
         {
+            _dragReleasePos = frame.origin.x;
             [ _accpetBtn onLinkClicked: self ];
             return;
         }
