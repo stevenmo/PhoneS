@@ -3191,7 +3191,6 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "callerRect": CENTER_RECTX(0, 51, 290, 50 ),
                     "callerSecondRect": CENTER_RECTX(0, 100, 140, 28 ),
                     "acceptBtnRect": CENTER_RECTX( 0, -156, 280, 78 ),
-                    "callBtnRect": CENTER_RECTX( -94, -152, 70, 70 ),
                     "remindRect": CENTER_RECTX(-93, -238, 24, 24 ),
                     "messageRect": CENTER_RECTX( 94, -237, 22, 19 ),
                     "caption_remindRect": CENTER_RECTX(-93, -217, 126, 34 ),

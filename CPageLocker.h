@@ -16,7 +16,5 @@
 
 @property (nonatomic, strong) CText *_slideBtn;
 @property (nonatomic, strong) CImage *_accpetBtn;
-@property (nonatomic, strong) CImage *_callBtn;
-@property (nonatomic, strong) UIButton *_slideCallBtn;
 
 @end
