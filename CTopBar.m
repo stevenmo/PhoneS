@@ -24,7 +24,7 @@
     __invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     __invertBtn.frame = invertRect;
     [__invertBtn setTitleColor:COLOR_INT(color) forState:UIControlStateNormal];
-    
+    __invertBtn.titleLabel.font = [UIFont systemFontOfSize: 11];
     
     _background = [ Utils getImageName: @"top-bar" templateName: themeId ];
     _height = 21;

@@ -129,7 +129,7 @@
     CRect * signalRects[] = { MYRECTI(6, 0, 34, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 32, 21 ), MYRECTI(6, 0, 21, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ) , MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ) };
     CRect * batteryRects[] = { MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 12), MYRECTI(-30, 5, 24, 10.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5) , MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5) };
     
-    CTopBar * topBar = [[ CTopBar alloc ] initWithTheme: themeId container:nil color:color backgroundColor:backColor batteryRect: batteryRects[themeIndex]  batteryColor:color signalRect: signalRects[themeIndex] maxSignalIcon:@"signal5" wifiRect: MYRECTI(102, 0, 21, 21 ) maxWifiIcon:@"wifi4" carrierRect:MYRECTI( 35, 0, 70, 21) timeRect:CENTER_RECTI( 0, 0, 80, 21)  invertRect:CGRectMake(230, 0, 80, 21)];
+    CTopBar * topBar = [[ CTopBar alloc ] initWithTheme: themeId container:nil color:color backgroundColor:backColor batteryRect: batteryRects[themeIndex]  batteryColor:color signalRect: signalRects[themeIndex] maxSignalIcon:@"signal5" wifiRect: MYRECTI(102, 0, 21, 21 ) maxWifiIcon:@"wifi4" carrierRect:MYRECTI( 35, 0, 70, 21) timeRect:CENTER_RECTI( 0, 0, 80, 21)  invertRect:CGRectMake(230, 5, 60, 13)];
     
     return topBar;
 }
