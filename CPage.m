@@ -129,9 +129,30 @@
     CRect * signalRects[] = { MYRECTI(6, 0, 34, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 32, 21 ), MYRECTI(6, 0, 21, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ) , MYRECTI(6, 0, 33.5, 21 ), MYRECTI(6, 0, 33.5, 21 ) };
     CRect * batteryRects[] = { MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 12), MYRECTI(-30, 5, 24, 10.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5) , MYRECTI(-30, 5, 24, 9.5), MYRECTI(-30, 5, 24, 9.5) };
     
-    CTopBar * topBar = [[ CTopBar alloc ] initWithTheme: themeId container:nil color:color backgroundColor:backColor batteryRect: batteryRects[themeIndex]  batteryColor:color signalRect: signalRects[themeIndex] maxSignalIcon:@"signal5" wifiRect: MYRECTI(102, 0, 21, 21 ) maxWifiIcon:@"wifi4" carrierRect:MYRECTI( 35, 0, 70, 21) timeRect:CENTER_RECTI( 0, 0, 80, 21) ];
+    CTopBar * topBar = [[ CTopBar alloc ] initWithTheme: themeId container:nil color:color backgroundColor:backColor batteryRect: batteryRects[themeIndex]  batteryColor:color signalRect: signalRects[themeIndex] maxSignalIcon:@"signal5" wifiRect: MYRECTI(102, 0, 21, 21 ) maxWifiIcon:@"wifi4" carrierRect:MYRECTI( 35, 0, 70, 21) timeRect:CENTER_RECTI( 0, 0, 80, 21)  invertRect:CGRectMake(230, 0, 80, 21)];
     
     return topBar;
+}
+
+-(NSString *) getInvertedTheme: (NSString *) theme
+{
+    if( [ theme isEqualToString: @"theme5" ] || [ theme isEqualToString: @"theme6" ] )
+        return @"theme9";
+    return @"theme5";
+}
+
+-(void) invertTopBar
+{
+    NSString * themeId = [ self getThemeName ];
+    if( !_bTopBarInverted ) {
+        themeId = [ self getInvertedTheme: themeId ];
+    }
+    [ _topBar._view removeFromSuperview ];
+    _topBar = [ self createTopBar: themeId delegate: _delegate ];
+    _topBar._container = self;
+    [ _topBar render: _view  bPlay: false ];
+    
+    _bTopBarInverted = !_bTopBarInverted;
 }
 
 -(void) copyFrom: (CPage *) page {
@@ -583,11 +604,13 @@
     _thumbnail = [ Utils captureView: self._view ];
 }
 
--(UIImage *) captureImage: ( UIView *) mainView {
+-(UIImage *) captureScreenshot: ( UIView *) mainView fileName: (NSString *) fileName {
     
     UIView * view = [ self render: mainView bPlay: true ];
     UIImage * img = [ Utils captureView: view ];
     [ view removeFromSuperview ];
+    [ Utils saveJPGImage:img fileName: fileName ];
+    
     return img;
 }
 

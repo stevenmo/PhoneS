@@ -8,7 +8,7 @@
 
 @synthesize _carrier,_background,_time,_height,_color,_battery,_signal,_wifi;
 
--(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
+-(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect invertRect:(CGRect) invertRect
 {
     self = [ super init ];
     
@@ -20,6 +20,11 @@
 
     _wifi = [[ CImage alloc ] initWithIcon: [ Utils getImageName:  @"wifi3" templateName: themeId ]  rect: wifiRect target:nil sel:nil container:self optionIcons: [ Utils getImageName: maxWifiIcon templateName: themeId ] backgroundColor:backgroundColor ];
     _wifi._removeable = true;
+    
+    __invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    __invertBtn.frame = invertRect;
+    [__invertBtn setTitleColor:COLOR_INT(color) forState:UIControlStateNormal];
+    
     
     _background = [ Utils getImageName: @"top-bar" templateName: themeId ];
     _height = 21;
@@ -44,6 +49,12 @@
     return [ self._container getDelegate ];
 }
 
+-(void) invertTop{
+    CPage * page = (CPage *)self._container;
+    [ page invertTopBar ];
+}
+
+
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
     UIButton * mainV = [[ UIButton alloc ] initWithFrame: CGRectMake(0,0, parentView.frame.size.width,_height) ];
@@ -51,6 +62,19 @@
     {
         [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
     }
+    
+
+    
+    [__invertBtn addTarget:self
+                    action:@selector(invertTop)
+          forControlEvents:UIControlEventTouchUpInside];
+    [__invertBtn setTitle:@"Invert" forState:UIControlStateNormal];
+    
+    if( !bPlay)
+    {
+        [ mainV addSubview:__invertBtn];
+    }
+
     [ _carrier render: mainV bPlay: bPlay ];
     [ _time render: mainV bPlay: bPlay ];
     [ _signal render: mainV bPlay: bPlay ];
@@ -60,30 +84,30 @@
 
     self._view = mainV;
     
-    if( !bPlay )
-        [ Utils setSingleTapHandlerToView: mainV delegate: nil target:self sel:@selector(onBarClicked:) ];
+//    if( !bPlay )
+//        [ Utils setSingleTapHandlerToView: mainV delegate: nil target:self sel:@selector(onBarClicked:) ];
     
     return [super render: parentView bPlay:bPlay ];
 }
 
 -(void) onBarClicked: (id) sender
 {
-    NSArray * btns = @[ @"Invert" ];
-    
-    [UIActionSheet presentOnView: self._view
-                       withTitle: nil
-                    cancelButton: @"Cancel"
-               destructiveButton: nil
-                    otherButtons: btns
-                        onCancel:^(UIActionSheet *actionSheet) {
-                        }
-                   onDestructive:^(UIActionSheet *actionSheet) {
-                   }
-                 onClickedButton:^(UIActionSheet *actionSheet, NSUInteger index) {
-                     
-                     CPage * page = (CPage *)self._container;
-                     [ page invertTopBar ];
-                 }];
+//    NSArray * btns = @[ @"Invert" ];
+//    
+//    [UIActionSheet presentOnView: self._view
+//                       withTitle: nil
+//                    cancelButton: @"Cancel"
+//               destructiveButton: nil
+//                    otherButtons: btns
+//                        onCancel:^(UIActionSheet *actionSheet) {
+//                        }
+//                   onDestructive:^(UIActionSheet *actionSheet) {
+//                   }
+//                 onClickedButton:^(UIActionSheet *actionSheet, NSUInteger index) {
+//                     
+//                     CPage * page = (CPage *)self._container;
+//                     [ page invertTopBar ];
+//                 }];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
