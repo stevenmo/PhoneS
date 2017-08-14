@@ -8,7 +8,7 @@
 
 @synthesize _carrier,_background,_time,_height,_color,_battery,_signal,_wifi;
 
--(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect invertRect:(CGRect) invertRect
+-(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
 {
     self = [ super init ];
     
@@ -22,7 +22,6 @@
     _wifi._removeable = true;
     
     __invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    __invertBtn.frame = invertRect;
     [__invertBtn setTitleColor:COLOR_INT(color) forState:UIControlStateNormal];
     __invertBtn.titleLabel.font = [UIFont systemFontOfSize: 11];
     
@@ -54,7 +53,6 @@
     [ page invertTopBar ];
 }
 
-
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
     UIButton * mainV = [[ UIButton alloc ] initWithFrame: CGRectMake(0,0, parentView.frame.size.width,_height) ];
@@ -62,7 +60,10 @@
     {
         [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
     }
-    
+    CRect *invertBox = CENTER_RECTX(240, 0, 100, 21);
+    CGRect invertRect = invertBox.getOriginalRect;
+    __invertBtn.frame = invertRect;
+
 
     
     [__invertBtn addTarget:self
