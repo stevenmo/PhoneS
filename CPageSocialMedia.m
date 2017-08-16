@@ -25,8 +25,6 @@
     __bottomBar._preferPureColor = true;
     __bottomBar._needImportInstruction = true;
 
-    self._topBar._initinvert = true;
-    
     [ self setupBottomIcons ];
     
     __titler = [[ CText alloc ] initWithText:@"MotionPiE.com" rect:MYRECTI(60,0,-120,44) color:0xffffff font: [UIFont fontWithName:@"SnellRoundHand-Bold" size:30] container:self ];

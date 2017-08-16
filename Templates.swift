@@ -3150,7 +3150,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "className" : "CPageSocialMedia",
                     "font": MYFONT(14),
                     "hasOptions": MYINT(1),
-                    "theme": "theme4",
+                    "theme": "theme5",
                 ],
         ],
         "gallery" :
