@@ -204,7 +204,7 @@
     
     if( _headerImage == nil )
     {
-        CRect * rect = MYRECTI(0,0,0,44);
+        CRect * rect = MYRECTI(0,0,0,h);
         _headerImage = [[ CImage alloc ] initWithIcon: nil rect:rect target:nil sel:nil container: self optionIcons:nil backgroundColor: nil ];
     }
     [ _headerImage render: view bPlay:bPlay ];
