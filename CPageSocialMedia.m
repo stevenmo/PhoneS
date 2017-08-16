@@ -24,10 +24,12 @@
     __bottomBar = [[ CImage alloc ] initWithIcon: [self getImageName:@"bottomBar"] rect:MYRECTI(0,-44,0,44) target:nil sel:nil container: self optionIcons: nil backgroundColor: 0x000000 ];
     __bottomBar._preferPureColor = true;
     __bottomBar._needImportInstruction = true;
+
+    self._topBar._initinvert = true;
     
     [ self setupBottomIcons ];
     
-    __titler = [[ CText alloc ] initWithText:@"My Title" rect:MYRECTI(60,0,-120,44) color:0xffffff font:BOLDFONT(16) container:self ];
+    __titler = [[ CText alloc ] initWithText:@"MotionPiE.com" rect:MYRECTI(60,0,-120,44) color:0xffffff font: [UIFont fontWithName:@"SnellRoundHand-Bold" size:30] container:self ];
     
     __postObjects = [[ NSMutableArray alloc ] init ];
     
@@ -38,7 +40,7 @@
 
 -(void) setupBottomIcons
 {
-    NSString * sIconNames[BottomIconsNUMB] = { @"home", @"like", @"search", @"camera", @"share" };
+    NSString * sIconNames[BottomIconsNUMB] = { @"home", @"like", @"search", @"camera", @"messages" };
     int y = __bottomBar._rect._posY + 2;
     
     for( int i=0; i < BottomIconsNUMB; i++ ) {

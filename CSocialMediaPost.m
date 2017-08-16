@@ -33,9 +33,11 @@
     _headerColor = color;
     _hasHeader = true;
     
-    __likeLabel = [[ CText alloc ] initWithText:@"1776 likes" rect:MYRECTI(10,36,120,22) color:0x000000 font:ITALICFONT(13) container:self ];
+    __likeLabel = [[ CText alloc ] initWithText:@"333 likes" rect:MYRECTI(10,36,120,22) color:0x000000 font:ITALICFONT(13) container:self ];
     __likeLabel._alignMode = TEXTALIGN_LEFT;
     [ __likeLabel setLinkToEnd ];
+    
+
     
     _comments = [[ NSMutableArray alloc ] init ];
     
@@ -44,7 +46,7 @@
 
 -(void) setupRatingIcons
 {
-    NSString * sIconNames[RatingIconsNUMB] = { @"like", @"messages", @"share" };
+    NSString * sIconNames[RatingIconsNUMB] = { @"like-old", @"messages-old", @"share" };
     int y = 310;
     
     for( int i=0; i < RatingIconsNUMB; i++ ) {

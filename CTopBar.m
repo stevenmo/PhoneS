@@ -8,6 +8,8 @@
 
 @synthesize _carrier,_background,_time,_height,_color,_battery,_signal,_wifi;
 
+
+
 -(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
 {
     self = [ super init ];
@@ -20,7 +22,7 @@
 
     _wifi = [[ CImage alloc ] initWithIcon: [ Utils getImageName:  @"wifi3" templateName: themeId ]  rect: wifiRect target:nil sel:nil container:self optionIcons: [ Utils getImageName: maxWifiIcon templateName: themeId ] backgroundColor:backgroundColor ];
     _wifi._removeable = true;
-    
+
     __invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [__invertBtn setTitleColor:COLOR_INT(color) forState:UIControlStateNormal];
     __invertBtn.titleLabel.font = [UIFont systemFontOfSize: 12];
@@ -32,7 +34,12 @@
     _carrier._alignMode = TEXTALIGN_CENTER;
     _time = [ [ CText alloc ] initWithText: @"9:00PM" rect: timeRect  color: _color font: MYFONT(12) container:self ];
     _time._inputType = UIKeyboardTypeNumbersAndPunctuation;
-    
+
+    if(__initinvert){
+        CPage * page = (CPage *)self._container;
+        [ page invertTopBar ];
+    }
+
     return self;
 }
 
@@ -47,11 +54,11 @@
 {
     return [ self._container getDelegate ];
 }
-
 -(void) invertTop{
     CPage * page = (CPage *)self._container;
     [ page invertTopBar ];
 }
+
 
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay
 {
