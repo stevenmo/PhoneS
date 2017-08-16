@@ -35,10 +35,7 @@
     _time = [ [ CText alloc ] initWithText: @"9:00PM" rect: timeRect  color: _color font: MYFONT(12) container:self ];
     _time._inputType = UIKeyboardTypeNumbersAndPunctuation;
 
-    if(__initinvert){
-        CPage * page = (CPage *)self._container;
-        [ page invertTopBar ];
-    }
+    
 
     return self;
 }
@@ -54,6 +51,7 @@
 {
     return [ self._container getDelegate ];
 }
+
 -(void) invertTop{
     CPage * page = (CPage *)self._container;
     [ page invertTopBar ];
@@ -67,6 +65,11 @@
     {
         [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
     }
+    
+//    if(__initinvert){
+//        CPage * page = (CPage *)self._container;
+//        [ page invertTopBar ];
+//    }
     CRect *invertBox = CENTER_RECTX(240, 0, 100, 21);
     CGRect invertRect = invertBox.getOriginalRect;
     __invertBtn.frame = invertRect;
