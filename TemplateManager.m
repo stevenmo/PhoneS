@@ -2903,13 +2903,14 @@ static NSString * s_pageNames[][7] = {
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10 alt" ID: @"unlock9" ];
     [ group addObject: st ];
+#endif
+    
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"incoming_call6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"incoming_call5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"incoming_call4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Outgoing Call" ];
     
@@ -2929,13 +2930,14 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"outgoing_call9" ];
     [ group addObject: st ];
+#endif
+
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"outgoing_call6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"outgoing_call5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"outgoing_call4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Mail Boxes" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"mailboxes3" ];
@@ -2953,13 +2955,14 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"mailboxes9" ];
     [ group addObject: st ];
+#endif
+
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"mailboxes6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"mailboxes5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"mailboxes4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"All Contacts" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"all_contacts3" ];
@@ -2977,13 +2980,14 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"all_contacts9" ];
     [ group addObject: st ];
+#endif
+    
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"all_contacts6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"all_contacts5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"all_contacts4" ];
     [ group addObject: st ];
-#endif
     group = [ self addGroup: @"Contact Detail" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"contact_detail3" ];
     [ group addObject: st ];
@@ -3000,13 +3004,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"contact_detail9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"contact_detail6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"contact_detail5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"contact_detail4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Inbox" ];
 
@@ -3025,13 +3029,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"inbox9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"inbox6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"inbox5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"inbox4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Home" ];
     
@@ -3050,13 +3054,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"home9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"home6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"home5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"home4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Compose Email" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"compose_email3" ];
@@ -3074,13 +3078,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"compose_email9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"compose_email6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"compose_email5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"compose_email4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Text Message" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"text_message3" ];
@@ -3098,13 +3102,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"text_message9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"text_message6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"text_message5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"text_message4" ];
     [ group addObject: st ];
-#endif
 
     group = [ self addGroup: @"Key Pad" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"keypad3" ];
@@ -3122,13 +3126,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"keypad9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"keypad6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"keypad5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"keypad4" ];
     [ group addObject: st ];
-#endif
 
     group = [ self addGroup: @"Favorites" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"favorites3" ];
@@ -3146,13 +3150,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"favorites9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"favorites6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"favorites5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"favorites4" ];
     [ group addObject: st ];
-#endif
     
     group = [ self addGroup: @"Alert" ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Posterus" ID: @"alert3" ];
@@ -3170,13 +3174,13 @@ static NSString * s_pageNames[][7] = {
     //[ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"IOS10" ID: @"alert9" ];
     [ group addObject: st ];
+#endif
     st = [[ CSceneTemplate alloc ] initWithName: @"Modern" ID: @"alert6" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Classic" ID: @"alert5" ];
     [ group addObject: st ];
     st = [[ CSceneTemplate alloc ] initWithName: @"Vintage" ID: @"alert4" ];
     [ group addObject: st ];
-#endif
 
 //    group = [ self addGroup: @"Unlock Home Screen" ];
 //    st = [[ CSceneTemplate alloc ] initWithName: @"Unlock Screen" ID: @"unlock" ];
