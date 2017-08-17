@@ -21,13 +21,19 @@
     __titleBar._needImportInstruction = true;
     __titleBar._removeable = true;
     
+    __middleBar = [[ CImage alloc ] initWithIcon: [self getImageName:@"middleBar"] rect: MYRECTI(0,44,0,44)  target:nil sel:nil container: self optionIcons: nil backgroundColor: 0x000000 ];
+
+    
+    
+    
+    
     __bottomBar = [[ CImage alloc ] initWithIcon: [self getImageName:@"bottomBar"] rect:MYRECTI(0,-44,0,44) target:nil sel:nil container: self optionIcons: nil backgroundColor: 0x000000 ];
     __bottomBar._preferPureColor = true;
     __bottomBar._needImportInstruction = true;
 
     [ self setupBottomIcons ];
     
-    __titler = [[ CText alloc ] initWithText:@"MotionPiE.com" rect:MYRECTI(60,0,-120,44) color:0xffffff font: [UIFont fontWithName:@"SnellRoundHand-Bold" size:30] container:self ];
+    __titler = [[ CText alloc ] initWithText:@"MotionPiE.com" rect:MYRECTI(60,0,-120,44) color:0x000000 font: [UIFont fontWithName:@"SnellRoundHand-Bold" size:30] container:self ];
     
     __postObjects = [[ NSMutableArray alloc ] init ];
     
@@ -76,6 +82,7 @@
     _cells = [[ NSMutableArray alloc ] init ];
     
     int top = self._topBar._hidden? 0: self._topBar._height;
+    
     __titleBar._rect._posY = top;
     
     top += __titleBar._rect._height;
@@ -83,9 +90,10 @@
     int bottom = __bottomBar._rect._height;
     
     UIView * mainV = [ super render: parentView bPlay: bPlay ];
-
+    [ __middleBar render: mainV bPlay:bPlay ];
     [ __titleBar render: mainV bPlay:bPlay ];
     [ __titler render: __titleBar._view bPlay:bPlay ];
+    
     
     [ __bottomBar render: mainV bPlay:bPlay ];
     

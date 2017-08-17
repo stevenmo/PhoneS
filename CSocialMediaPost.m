@@ -197,8 +197,8 @@
     float h = [ self getSectionHeaderHeight: tableView ];
 
     UIButton * view = [[ UIButton alloc ] init ];
-    view.backgroundColor = COLOR_INT(_headerColor);
-    view.frame = CGRectMake( 0, 0, w, h );
+    
+    [view setBackgroundImage:[UIImage imageNamed: @"middleBar"]  forState:UIControlStateNormal];
 
     _headerView = view;
 
@@ -207,7 +207,7 @@
     if( _headerImage == nil )
     {
         CRect * rect = MYRECTI(0,0,0,h);
-        _headerImage = [[ CImage alloc ] initWithIcon: nil rect:rect target:nil sel:nil container: self optionIcons:nil backgroundColor: nil ];
+        _headerImage = [[ CImage alloc ] initWithIcon:  @"middleBar" rect:rect target:nil sel:nil container: self optionIcons:nil backgroundColor: nil ];
     }
     [ _headerImage render: view bPlay:bPlay ];
     _headerImage._view.userInteractionEnabled = false;

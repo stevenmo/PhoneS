@@ -15,6 +15,8 @@
 @property (nonatomic, strong) CImage *_titleBar;
 @property (nonatomic, strong) CText *_titler;
 @property (nonatomic, strong) CImage *_bottomBar;
+@property (nonatomic, strong) CImage *_middleBar;
+
 
 @property (nonatomic, strong) NSMutableArray *_postObjects;
 @property (nonatomic, strong) UITableView * _tableView;
