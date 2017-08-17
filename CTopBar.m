@@ -30,11 +30,6 @@
     _time = [ [ CText alloc ] initWithText: @"9:00PM" rect: timeRect  color: _color font: MYFONT(12) container:self ];
     _time._inputType = UIKeyboardTypeNumbersAndPunctuation;
 
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> 9aba0bbf27d30443601958cc5dca6c9ab6892b56
     return self;
 }
 
@@ -83,24 +78,6 @@
     {
         [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
     }
-<<<<<<< HEAD
-    
-//    if(__initinvert){
-//        CPage * page = (CPage *)self._container;
-//        [ page invertTopBar ];
-//    }
-    CRect *invertBox = CENTER_RECTX(240, 0, 100, 21);
-    CGRect invertRect = invertBox.getOriginalRect;
-    __invertBtn.frame = invertRect;
-
-
-    
-    [__invertBtn addTarget:self
-                    action:@selector(invertTop)
-          forControlEvents:UIControlEventTouchUpInside];
-    [__invertBtn setTitle:@"Invert" forState:UIControlStateNormal];
-=======
->>>>>>> 9aba0bbf27d30443601958cc5dca6c9ab6892b56
     
     if( !bPlay)
         [ self setupInvertButton: mainV ];
