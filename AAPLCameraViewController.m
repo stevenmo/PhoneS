@@ -25,6 +25,9 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 };
 
 @interface AAPLCameraViewController () <AVCaptureFileOutputRecordingDelegate>
+{
+    UIDeviceOrientation _prevOrientation;
+}
 
 // For use in the storyboards.
 @property (nonatomic, weak) IBOutlet AAPLPreviewView *previewView;
@@ -51,7 +54,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 {
     //[ CSettings sharedInstance ]._bScreenLandscape = true;
     //[ CSettings sharedInstance ]._bRestrictRotation = false;
-    _prevOrientation = UIInterfaceOrientationPortrait;
+    
+    _prevOrientation = UIDeviceOrientationPortrait;
+    [ self onOrientationChanged: nil ];
+    
     [ [NSNotificationCenter defaultCenter] removeObserver: self ];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onOrientationChanged:)
@@ -59,89 +65,38 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
                                                object:nil ];
 }
 
+-(void) rotateButtons: (CGFloat) angle
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+        
+        _libraryButton.transform = transform;
+        _resumeButton.transform = transform;
+        _cameraButton.transform = transform;
+        _stillButton.transform = transform;
+        _recordButton.transform = transform;
+        
+    }completion:^(BOOL finished){}];
+}
+
 -(void) onOrientationChanged: (NSNotification *) noti {
     
     NSLog(@"onOrientationChanged");
 
-    UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
-    if ( orientation == UIInterfaceOrientationLandscapeLeft && _prevOrientation ==  UIInterfaceOrientationPortrait) {
-        NSLog(@"landscape");
-        [UIView animateWithDuration:0.25 animations:^{
-            _libraryButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _resumeButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _recordButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _cameraButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _stillButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    if ( orientation != _prevOrientation ) {
+        
+        CGFloat angle = 0;
+        if ( orientation == UIInterfaceOrientationLandscapeLeft ) {
+            angle = -M_PI/2;
+        }else if ( orientation == UIInterfaceOrientationLandscapeRight ) {
+            angle = M_PI/2;
+        }
+        [ self rotateButtons: angle ];
         _prevOrientation = orientation;
+        self.previewView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
     }
-    if ( orientation == UIInterfaceOrientationLandscapeRight && _prevOrientation ==  UIInterfaceOrientationPortrait) {
-        NSLog(@"landscape");
-        [UIView animateWithDuration:0.25 animations:^{
-            _libraryButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _resumeButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _recordButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _cameraButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _stillButton.transform = CGAffineTransformMakeRotation(M_PI/2);
-        }completion:^(BOOL finished){}];
-        _prevOrientation = orientation;
-    }
-    if ( orientation == UIInterfaceOrientationPortrait && _prevOrientation == UIInterfaceOrientationLandscapeLeft) {
-        NSLog(@"portrait");
-        [UIView animateWithDuration:0.25 animations:^{
-            _libraryButton.transform = CGAffineTransformMakeRotation(M_PI);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _resumeButton.transform = CGAffineTransformMakeRotation(M_PI);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _recordButton.transform = CGAffineTransformMakeRotation(M_PI);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _cameraButton.transform = CGAffineTransformMakeRotation(M_PI);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _stillButton.transform = CGAffineTransformMakeRotation(M_PI);
-        }completion:^(BOOL finished){}];
-        _prevOrientation = orientation;
-    }
-    if ( orientation == UIInterfaceOrientationPortrait && _prevOrientation == UIInterfaceOrientationLandscapeRight) {
-        NSLog(@"portrait");
-        [UIView animateWithDuration:0.25 animations:^{
-            _libraryButton.transform = CGAffineTransformMakeRotation(M_PI*2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _resumeButton.transform = CGAffineTransformMakeRotation(M_PI*2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _recordButton.transform = CGAffineTransformMakeRotation(M_PI*2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _cameraButton.transform = CGAffineTransformMakeRotation(M_PI*2);
-        }completion:^(BOOL finished){}];
-        [UIView animateWithDuration:0.25 animations:^{
-            _stillButton.transform = CGAffineTransformMakeRotation(M_PI*2);
-        }completion:^(BOOL finished){}];
-        _prevOrientation = orientation;
-    }
-    self.previewView.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
-//    [UIView commitAnimations];
 }
 
 - (void)viewDidLoad
