@@ -9,7 +9,7 @@
 @synthesize _carrier,_background,_time,_height,_color,_battery,_signal,_wifi;
 
 
--(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
+-(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect invertBox: (CRect *) invertBox
 {
     self = [ super init ];
     
@@ -29,7 +29,7 @@
     _carrier._alignMode = TEXTALIGN_CENTER;
     _time = [ [ CText alloc ] initWithText: @"9:00PM" rect: timeRect  color: _color font: MYFONT(12) container:self ];
     _time._inputType = UIKeyboardTypeNumbersAndPunctuation;
-
+    _invertRect = invertBox.getOriginalRect;
     return self;
 }
 
@@ -54,11 +54,11 @@
 {
     UIButton * invertBtn;
 
-    CRect *invertBox = CENTER_RECTX(240, 0, 100, 21);
-    CGRect invertRect = invertBox.getOriginalRect;
+
+    
     
     invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    invertBtn.frame = invertRect;
+    invertBtn.frame = _invertRect;
 
     [invertBtn setTitleColor:COLOR_INT(_color) forState:UIControlStateNormal];
     invertBtn.titleLabel.font = MYFONT(12);

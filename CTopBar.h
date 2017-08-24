@@ -15,10 +15,11 @@
 @property (nonatomic, strong) CImage *_wifi;
 
 @property (nonatomic) int _color;
+@property (nonatomic) CGRect invertRect;
 @property (nonatomic) int _height;
 -(UIView *) render: (UIView *) parentView bPlay:(bool)bPlay;
 
--(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect ;
+-(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect invertBox: (CRect *) invertBox;
 - (void) copyFrom: ( CTopBar *) topBar;
 -(void) setTextColor: (int) color;
 -(void) invertTop;
