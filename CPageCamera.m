@@ -79,27 +79,25 @@
     _subVc.button_width_constraint.constant = r._width;
     _subVc.button_height_constraint.constant = r._height;
 
-    int posAdjustment = [[ self._params objectForKey:@"posAdjustment" ] intValue];
-    if(posAdjustment == 0)
-        posAdjustment = 16;
+
     [ self createImageButtonInView: _subVc.libraryButton imageName:@"library" rect:r target:nil sel:nil ];
 
     if( bCameraUp ) {
         
         float w = (self._view.frame.size.width - 3 * r._width)/4;
 
-        _subVc.library_leading_constraint.constant = w-posAdjustment;
-        _subVc.record_leading_constraint.constant = w*2+r._width-posAdjustment;
-        _subVc.still_leading_constraint.constant = w*3+r._width*2-posAdjustment;
-        _subVc.camera_leading_constraint.constant = w*3+r._width*2-posAdjustment;
+        _subVc.library_leading_constraint.constant = w-16;
+        _subVc.record_leading_constraint.constant = w*2+r._width-16;
+        _subVc.still_leading_constraint.constant = w*3+r._width*2-16;
+        _subVc.camera_leading_constraint.constant = w*3+r._width*2-16;
     } else {
 
         float w = (self._view.frame.size.width - 4 * r._width)/5;
         
-        _subVc.library_leading_constraint.constant = w-posAdjustment;
-        _subVc.record_leading_constraint.constant = w*2+r._width-posAdjustment;
-        _subVc.still_leading_constraint.constant = w*3+r._width*2-posAdjustment;
-        _subVc.camera_leading_constraint.constant = w*4+r._width*3-posAdjustment;
+        _subVc.library_leading_constraint.constant = w-16;
+        _subVc.record_leading_constraint.constant = w*2+r._width-16;
+        _subVc.still_leading_constraint.constant = w*3+r._width*2-16;
+        _subVc.camera_leading_constraint.constant = w*4+r._width*3-16;
     }
 }
 

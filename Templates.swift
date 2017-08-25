@@ -3065,85 +3065,50 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         ],
         "camera1" :
             [
-                "iPhone5" : [
-                    "className" : "CPageCamera",
-                    "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
-                    "iconRect": MYRECTI( 0, 0, 45, 45),
-                    "theme": "theme3",
-                ],
+
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera2" :
             [
-                "iPhone5" : [
-                    "className" : "CPageCamera",
-                    "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
-                    "iconRect": MYRECTI( 0, 0, 66, 40 ),
-                    "theme": "theme3",
-                ],
+
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 66, 40 ),
                     "theme": "theme3",
                 ],
         ],
         "camera3" :
             [
-                "iPhone5" : [
-                    "className" : "CPageCamera",
-                    "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
-                    "iconRect": MYRECTI( 0, 0, 45, 45),
-                    "theme": "theme3",
-                ],
+
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera7" :
             [
-                "iPhone5" : [
-                    "className" : "CPageCamera",
-                    "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
-                    "iconRect": MYRECTI( 0, 0, 45, 45),
-                    "theme": "theme3",
-                ],
+
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera8" :
             [
-                "iPhone5" : [
-                    "className" : "CPageCamera",
-                    "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
-                    "iconRect": MYRECTI( 0, 0, 56, 33 ),
-                    "theme": "theme3",
-                ],
+
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
-                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 56, 33 ),
                     "theme": "theme3",
                 ],
