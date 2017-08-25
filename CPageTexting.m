@@ -20,8 +20,7 @@
     self._exitPos = CGPointMake(5,70);
     
     int titleColor = [[ params objectForKey:@"titleColor"] intValue ];
-//    int inputTextColor = [[ params objectForKey:@"inputTextColor"] intValue ];
-    int inputTextColor = 0x0;
+    int inputTextColor = [[ params objectForKey:@"inputTextColor"] intValue ];
     int myTextColor = [[ params objectForKey:@"myTextColor"] intValue ];
     int otherTextColor = [[ params objectForKey:@"otherTextColor"] intValue ];
     int timeTextColor = [[ params objectForKey:@"timeTextColor"] intValue ];

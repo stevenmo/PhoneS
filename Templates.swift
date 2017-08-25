@@ -1798,7 +1798,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "lineHeight": MYINT(25),
                     "topHeight": MYINT(44),
                     "bottomHeight": MYINT(44),
-                    "inputTextColor": MYINT(0x0ffffff),
+                    "inputTextColor": MYINT(0x0),
                     "titleColor": MYINT(0x0ffffff),
                     "titleFont": BOLDFONT(20),
                     "myTextColor": MYINT(0x0),
@@ -1827,7 +1827,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "topHeight": MYINT(44),
                     "topbar_textcolor": MYINT(0),
                     "bottomHeight": MYINT(44),
-                    "inputTextColor": MYINT(0x0ffffff),
+                    "inputTextColor": MYINT(0x0),
                     "titleColor": MYINT(0x0),
                     "titleFont": BOLDFONT(20),
                     "myTextColor": MYINT(0x0ffffff),
@@ -1858,7 +1858,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "topHeight": MYINT(44),
                     "topbar_textcolor": MYINT(0),
                     "bottomHeight": MYINT(44),
-                    "inputTextColor": MYINT(0x0ffffff),
+                    "inputTextColor": MYINT(0x0),
                     "titleColor": MYINT(0x0),
                     "titleFont": BOLDFONT(20),
                     "myTextColor": MYINT(0x0ffffff),
@@ -1887,7 +1887,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "lineHeight": MYINT(25),
                     "topHeight": MYINT(44),
                     "bottomHeight": MYINT(44),
-                    "inputTextColor": MYINT(0xffffff),
+                    "inputTextColor": MYINT(0x0),
                     "titleColor": MYINT(0xffffff),
                     "titleFont": BOLDFONT(20),
                     "myTextColor": MYINT(0xffffff),
@@ -1917,7 +1917,7 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
                     "lineHeight": MYINT(25),
                     "topHeight": MYINT(44),
                     "bottomHeight": MYINT(44),
-                    "inputTextColor": MYINT(0xffffff),
+                    "inputTextColor": MYINT(0x0),
                     "titleColor": MYINT(0xffffff),
                     "titleFont": BOLDFONT(20),
                     "myTextColor": MYINT(0xffffff),
@@ -3065,45 +3065,85 @@ fileprivate func COLORF(_ a: Int, _ b: Int, _ c: Int, _ d: Float ) -> UIColor {
         ],
         "camera1" :
             [
+                "iPhone5" : [
+                    "className" : "CPageCamera",
+                    "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
+                    "iconRect": MYRECTI( 0, 0, 45, 45),
+                    "theme": "theme3",
+                ],
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera2" :
             [
+                "iPhone5" : [
+                    "className" : "CPageCamera",
+                    "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
+                    "iconRect": MYRECTI( 0, 0, 66, 40 ),
+                    "theme": "theme3",
+                ],
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 66, 40 ),
                     "theme": "theme3",
                 ],
         ],
         "camera3" :
             [
+                "iPhone5" : [
+                    "className" : "CPageCamera",
+                    "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
+                    "iconRect": MYRECTI( 0, 0, 45, 45),
+                    "theme": "theme3",
+                ],
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera7" :
             [
+                "iPhone5" : [
+                    "className" : "CPageCamera",
+                    "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
+                    "iconRect": MYRECTI( 0, 0, 45, 45),
+                    "theme": "theme3",
+                ],
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 45, 45),
                     "theme": "theme3",
                 ],
         ],
         "camera8" :
             [
+                "iPhone5" : [
+                    "className" : "CPageCamera",
+                    "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
+                    "iconRect": MYRECTI( 0, 0, 56, 33 ),
+                    "theme": "theme3",
+                ],
                 "iPhone6" : [
                     "className" : "CPageCamera",
                     "backgroundColor": UIColor.white,
+                    "posAdjustment": MYINT(16),
                     "iconRect": MYRECTI( 0, 0, 56, 33 ),
                     "theme": "theme3",
                 ],
