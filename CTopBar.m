@@ -9,7 +9,7 @@
 @synthesize _carrier,_background,_time,_height,_color,_battery,_signal,_wifi;
 
 
--(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect invertBox: (CRect *) invertBox
+-(id) initWithTheme: (NSString *) themeId container:(id<ContainerDelegate>)container color:(int)color backgroundColor: (UIColor *) backgroundColor batteryRect: (CRect *) batteryRect batteryColor: (int) batteryColor signalRect: (CRect *) signalRect maxSignalIcon: (NSString *) maxSignalIcon wifiRect: (CRect *) wifiRect maxWifiIcon: (NSString *) maxWifiIcon carrierRect: (CRect *) carrierRect timeRect: (CRect *) timeRect
 {
     self = [ super init ];
     
@@ -29,7 +29,6 @@
     _carrier._alignMode = TEXTALIGN_CENTER;
     _time = [ [ CText alloc ] initWithText: @"9:00PM" rect: timeRect  color: _color font: MYFONT(12) container:self ];
     _time._inputType = UIKeyboardTypeNumbersAndPunctuation;
-    _invertRect = invertBox.getOriginalRect;
     return self;
 }
 
@@ -50,15 +49,12 @@
     [ page invertTopBar ];
 }
 
--(void) setupInvertButton: (UIView *) parentView
+-(void) setupInvertButton: (UIView *) parentView rect: (CGRect) rect
 {
     UIButton * invertBtn;
-
-
-    
     
     invertBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    invertBtn.frame = _invertRect;
+    invertBtn.frame = rect;
 
     [invertBtn setTitleColor:COLOR_INT(_color) forState:UIControlStateNormal];
     invertBtn.titleLabel.font = MYFONT(12);
@@ -79,9 +75,6 @@
         [ mainV setBackgroundImage: [ Utils loadImage: _background ]  forState: UIControlStateNormal ];
     }
     
-    if( !bPlay)
-        [ self setupInvertButton: mainV ];
-
     [ _carrier render: mainV bPlay: bPlay ];
     [ _time render: mainV bPlay: bPlay ];
     [ _signal render: mainV bPlay: bPlay ];
@@ -89,6 +82,14 @@
     
     [ _battery render: mainV bPlay: bPlay ];
 
+    if( !bPlay)
+    {
+        CGRect timeFrame = _time._view.frame;
+        CGFloat w = 50;
+        CGFloat x = (timeFrame.origin.x + timeFrame.size.width + _battery._view.frame.origin.x - w )/2;
+        CGRect r = CGRectMake(x,0,w,timeFrame.size.height);
+        [ self setupInvertButton: mainV rect: r ];
+    }
     self._view = mainV;
     
 //    if( !bPlay )
