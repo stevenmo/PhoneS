@@ -24,10 +24,10 @@
 -(void) setupIcons
 {
     if ( [ self._templateName containsString:@"home9" ] )
-        _bottomIcons = [ NSMutableArray arrayWithObjects:@"Phone", @"Safari", @"Mail", @"Music", nil ];
+        _bottomIcons = [ NSMutableArray arrayWithObjects:@"Phone", @"Web", @"Mail", @"Music", nil ];
     else if ( [ self._templateName containsString:@"home4" ] || [ self._templateName containsString:@"home5" ] || [ self._templateName containsString:@"home6" ] )
     {
-        _bottomIcons = [ NSMutableArray arrayWithObjects:@"Phone", @"Mail", @"Safari", @"Music", nil ];
+        _bottomIcons = [ NSMutableArray arrayWithObjects:@"Phone", @"Mail", @"Web", @"Music", nil ];
     }else {
         _bottomIcons = [ NSMutableArray arrayWithObjects:@"Phone", @"Mail", @"Browser", @"Music", nil ];
     }
@@ -38,18 +38,18 @@
 {
     if ( [ self._templateName containsString:@"home9" ] )
     {
-        NSMutableArray * arr = [ NSMutableArray arrayWithObjects:@"Messager", @"Notes", @"Appstore", @"Camera",  @"Health", @"FaceTime", @"Clock",  @"Book", @"Calendar", @"Twitter", @"Weather", @"Photos", @"Maps", @"Stock", @"Game-Center", @"Settings", nil ];
+        NSMutableArray * arr = [ NSMutableArray arrayWithObjects:@"Messages", @"Notes", @"Camera",  @"Health", @"Video-Call", @"Clock",  @"Book", @"Calendar", @"Weather", @"Photos", @"Maps", @"Stock", @"Settings", nil ];
         return arr;
     } else if ( [ self._templateName containsString:@"home6" ] )
     {
-        NSMutableArray * arr = [ NSMutableArray arrayWithObjects:@"Appstore", @"Camera", @"Messager", @"FaceTime", @"Clock", @"Passbook", @"Notes", @"Recorder",  @"Twitter", @"Weather", @"Photos", @"Maps", @"Calendar", @"Game-Center", @"Settings", nil ];
+        NSMutableArray * arr = [ NSMutableArray arrayWithObjects: @"Camera", @"Messages", @"Video-Call", @"Clock", @"Notes", @"Recorder",  @"Weather", @"Photos", @"Maps", @"Calendar", @"Settings", nil ];
         if ( bAll )
             [ arr addObjectsFromArray: [ NSMutableArray arrayWithObjects: @"iMovie", nil ] ];
         return arr;
         
     }else if ( [ self._templateName containsString:@"home4" ] || [ self._templateName containsString:@"home5" ] )
     {
-        return [ NSMutableArray arrayWithObjects:@"Appstore", @"Camera", @"Clock", @"Passbook", @"Notes", @"Weather", @"Photos", @"Maps", @"Calendar", @"Game-Center", @"Settings", nil ];
+        return [ NSMutableArray arrayWithObjects: @"Camera", @"Clock", @"Notes", @"Weather", @"Photos", @"Maps", @"Calendar",  @"Settings", nil ];
     }else if ( [ self._templateName containsString:@"home7" ] )  {
         return [ NSMutableArray arrayWithObjects:@"Calculator", @"Camera", @"Clock", @"Contacts", @"Videos", @"Weather", @"Photos", @"Calendar", @"Messages", @"Games", @"Map", @"Settings",  nil ];
     }else {
