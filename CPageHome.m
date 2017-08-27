@@ -7,6 +7,7 @@
 #import "EditViewController.h"
 #import "HomeIconImportVC.h"
 #import "EditOptionIconsVC.h"
+#import "NSString+ContainsString.h"
 
 @implementation CPageHome
 
