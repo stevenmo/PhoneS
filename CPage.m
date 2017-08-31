@@ -707,6 +707,11 @@
 	}
     return self;
 }
+-(void)setBackgroundImage:(UIImage *)backgroundImage
+{
+    self._backgroundImg = backgroundImage;
+}
+
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
